@@ -14,10 +14,10 @@ private:
 
 public:
     // Constructor of the Contact class
-    Contact();
+	Contact();
 
     // Destructor of the Contact class
-    ~Contact();
+	~Contact();
 
 	// display the contact
 	void displayContact();

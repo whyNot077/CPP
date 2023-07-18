@@ -12,16 +12,16 @@ private:
 
 public:
     // Constructor of the PhoneBook class
-    PhoneBook();
+	PhoneBook();
 
     // Destructor of the PhoneBook class
-    ~PhoneBook();
+	~PhoneBook();
 
     // Save a new contact
-    void addContact();
+	void addContact();
 
     // Display a specific contact
-    void searchContact(int index) const;
+	void searchContact(int index) const;
 
 	// Close the phonebook
 	void closePhoneBook();
