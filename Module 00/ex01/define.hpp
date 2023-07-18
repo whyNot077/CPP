@@ -9,5 +9,6 @@
 # define CLOSE "Close the phonebook\n"
 # define OPEN "Open the phonebook\n"
 # define ADD "Add a new contact\n"
+# define EMPTY_INPUT "You must enter something\n"
 
 #endif
