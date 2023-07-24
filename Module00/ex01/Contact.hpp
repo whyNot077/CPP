@@ -14,10 +14,7 @@ private:
     std::string m_darkestSecret;
 
 	void DisplayOnlyTenChar(const std::string& str) const;
-
-    // get contact information from user
 	std::string GetContactInfo(const std::string& message);
-
     int CinError() const;
 
 public:
