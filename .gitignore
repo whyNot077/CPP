@@ -1,6 +1,7 @@
 */*/*.d
 */*/*.o
 */*/megaphone
+*/*/zombie
 *.o
 *.d
 .DS_Store
