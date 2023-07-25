@@ -1,5 +1,4 @@
-# include "Zombie.hpp"
-
+#include "Zombie.hpp"
 #include <string>
 #include <cstdlib>
 #include <cstring>

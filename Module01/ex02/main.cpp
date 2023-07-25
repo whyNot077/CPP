@@ -1,3 +1,5 @@
+# include <iostream>
+
 # define STRING_VARIABLE "HI THIS IS BRAIN"
 # define STRING "string: "
 # define STRINGPTR "stringPTR: "
@@ -8,7 +10,6 @@
 # define BLUE "\033[34m"
 # define DEFAULT "\033[0m"
 # define CYAN "\033[36m"
-# include <iostream>
 
 int main() {
     std::string string = STRING_VARIABLE;
