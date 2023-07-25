@@ -7,14 +7,12 @@
 class GetInput {
 private:
     static void ExitEOF();
+    static void ClearBuffer();
     static bool CinError(const std::string message);
     static std::string EraseFrontSpace(const std::string& str);
     static std::string IgnoreEscapeSequences(const std::string& str);
 
-public:
-    // clear buffer
-    static void ClearBuffer();
-    
+public:    
     // get commands from user, if space is in front of command, it will be ignored
     static bool GetCommand(std::string& command);
 

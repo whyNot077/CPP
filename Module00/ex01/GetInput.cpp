@@ -7,7 +7,7 @@ void GetInput::ExitEOF() {
 }
 
 bool GetInput::CinError(const std::string message) {
-    if (std::cin.fail()){
+    if (!std::cin.good()){
         GetInput::ClearBuffer();
         Print::PrintMessage(message, DEFAULT);
         return true;
