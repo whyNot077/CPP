@@ -3,21 +3,7 @@
 
 #include <iostream>
 
-class Zombie {
-private:
-    std::string m_name;
-
-public:
-    // destructor
-    ~Zombie();
-
-    // announce themselves, name : BraiiiiiiinnnzzzZ...
-    void announce() const;
-
-    // set name
-    void SetName(std::string name);
-};
-
+#define NUMBER_OF_ZOMBIE 7
 #define BLACK "\033[30m"
 #define RED "\033[31m"
 #define GREEN "\033[32m"
@@ -39,6 +25,20 @@ shouting, screaming, moaning, groaning, howling, growling, \
 wounded, injured, bleeding, limping, crawling, staggering, \
 running, walking, shambling, lurching, stumbling, \
 limping, dragging, shuffling, hobbling, lurching"
-#define NUMBER_OF_ZOMBIE 7
+
+class Zombie {
+private:
+    std::string m_name;
+
+public:
+    // destructor
+    ~Zombie();
+
+    // announce themselves, name : BraiiiiiiinnnzzzZ...
+    void announce() const;
+
+    // set name
+    void SetName(std::string name);
+};
 
 #endif
