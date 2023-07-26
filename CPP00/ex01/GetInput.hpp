@@ -3,6 +3,7 @@
 
 #include "define.hpp"
 #include <iostream>
+#include <string>
 
 class GetInput {
 private:

@@ -11,7 +11,6 @@ private:
     std::ofstream m_outfile;
     std::string m_line;
 
-
     std::string ConvertLine(const std::string& line, const std::string& find_str, const std::string& replace_str);
     void WriteLine(const std::string& line);
     std::ifstream& GetInputFileStream();
@@ -22,9 +21,11 @@ public:
 
     // Create a new file and return ofstream
     void OpenOutfile(const std::string& filename);
+
     // Close file
     ~File();
 
+    // Read file, replace string in the line and write to new file
     void ConvertEveryWords(const std::string& find_str, const std::string& replace_str);
 };
 

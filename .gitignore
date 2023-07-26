@@ -1,7 +1,10 @@
 */*/*.d
 */*/*.o
 */*/megaphone
+*/*/phonebook
 */*/zombie
+*/*/account
+*/*/program
 *.o
 *.d
 .DS_Store
