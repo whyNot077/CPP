@@ -23,32 +23,32 @@ Harl::Harl() {
     m_complain_func[3] = &Harl::error;
 }
 
-int Harl::get_index(std::string level) {
+ComplaintLevel Harl::get_index(std::string level) {
     if (level == DEBUG)
-        return CASE_DEBUG;
+        return Debug;
     else if (level == INFO)
-        return CASE_INFO;
+        return Info;
     else if (level == WARNING)
-        return CASE_WARNING;
+        return Warning;
     else if (level == ERROR)
-        return CASE_ERROR;
+        return Error;
     else
-        return CASE_OTHER;
+        return Other;
 }
 
 void Harl::complain(std::string level) {
-    int index = get_index(level);
+    ComplaintLevel index = get_index(level);
     switch (index) {
-        case CASE_DEBUG:
+        case Debug:
             (this->*m_complain_func[0])();
             break;
-        case CASE_INFO:
+        case Info:
             (this->*m_complain_func[1])();
             break;
-        case CASE_WARNING:
+        case Warning:
             (this->*m_complain_func[2])();
             break;
-        case CASE_ERROR:
+        case Error:
             (this->*m_complain_func[3])();
             break;
         default:
@@ -56,4 +56,3 @@ void Harl::complain(std::string level) {
             break;
     }
 }
-

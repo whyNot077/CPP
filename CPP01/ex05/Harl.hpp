@@ -14,11 +14,14 @@ I’ve been coming for years whereas you started working here since last month."
 #define WARNING "warning"
 #define ERROR "error"
 #define GOOD "good"
-#define CASE_DEBUG 0
-#define CASE_INFO 1
-#define CASE_WARNING 2
-#define CASE_ERROR 3
-#define CASE_OTHER -1
+
+enum ComplaintLevel {
+    Debug,
+    Info,
+    Warning,
+    Error,
+    Other
+};
 
 #define BLACK "\033[30m"
 #define RED "\033[31m"
@@ -38,7 +41,7 @@ private:
     void info();
     void warning();
     void error();
-    int get_index(std::string level);
+    ComplaintLevel get_index(std::string level);
 
 public:
     void complain(std::string level);
