@@ -4,10 +4,14 @@ int main() {
     Harl harl;
 
     int arr[5] = {1, 5, 3, 2, 4};
+
+    for (int i = 0; i < 5; i++)
+        std::cout << arr[i] << std::endl;
     for (int i = 0; i < 5; i++) {
         for (int j = i + 1; j < 5; j++) {
             harl.complain(DEBUG);
             if (arr[i] > arr[j]) {
+                std::cout << "Swap " << arr[i] << " and " << arr[j] << std::endl;
                 harl.complain(INFO);
                 int temp = arr[i];
                 arr[i] = arr[j];
@@ -26,6 +30,7 @@ int main() {
 
     int new_num = 6;
     std::cout << "New number: " << new_num << std::endl;
+    harl.complain(INFO);
     harl.complain(WARNING);
     arr[2] = new_num;
 

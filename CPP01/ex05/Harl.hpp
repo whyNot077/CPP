@@ -36,11 +36,12 @@ enum ComplaintLevel {
 class Harl {
 private:
     typedef void (Harl::*complain_func)();
-    complain_func m_complain_func[4];
+    complain_func m_complain_func[5];
     void debug();
     void info();
     void warning();
     void error();
+    void other();
     ComplaintLevel get_index(std::string level);
 
 public:
