@@ -1,9 +1,9 @@
 CC              = c++ -std=c++98
 CFLAGS          = -Wall -Wextra -Werror -MMD
-NAME            = harl
+NAME            = harlFilter
 RM              = rm -f
 
-EXEC            = harl
+EXEC            = harlFilter
 SOURCES			= main.cpp Harl.cpp
 
 OBJECTS         = $(SOURCES:.cpp=.o)

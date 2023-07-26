@@ -5,6 +5,8 @@
 */*/zombie
 */*/account
 */*/program
+*/*/harl
+*/*/harlFilter
 *.o
 *.d
 .DS_Store
