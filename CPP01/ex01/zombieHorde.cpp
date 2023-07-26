@@ -1,5 +1,4 @@
 #include "Zombie.hpp"
-#include <string>
 
 std::string* split(const std::string& str, char delim, int& count) {
     std::string* words;

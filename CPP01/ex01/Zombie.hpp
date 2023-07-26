@@ -2,6 +2,7 @@
 #define ZOMBIE_HPP
 
 #include <iostream>
+#include <string>
 
 #define NUMBER_OF_ZOMBIE 7
 #define BLACK "\033[30m"
