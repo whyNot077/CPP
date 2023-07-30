@@ -17,18 +17,17 @@ void File::OpenOutfile(const std::string& filename) {
 }
 
 std::string File::ConvertLine(const std::string& line, const std::string& find_str, const std::string& replace_str) {
-    std::string new_line;
+    std::string new_line = line;
     std::size_t pos = 0;
-    std::size_t start = 0;
-    
-    while ((pos = line.find(find_str, start)) != std::string::npos) {
-        new_line += line.substr(start, pos - start) + replace_str;
-        start = pos + find_str.length();
+
+    while ((pos = new_line.find(find_str, pos)) != std::string::npos) {
+        new_line.erase(pos, find_str.length());
+        new_line.insert(pos, replace_str);
+        pos += replace_str.length();
     }
-    new_line += line.substr(start);
+
     return new_line;
 }
-
 
 void File::WriteLine(const std::string& message) {
     if (m_outfile.is_open()) {
