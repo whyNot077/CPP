@@ -27,7 +27,7 @@ bool bsp(const Point &a, const Point &b, const Point &c, const Point &point) {
     Fixed v = (dot_BB * dot_CP - dot_BC * dot_BP) / denom;
     Fixed w = Fixed(1) - u - v;
 
-    return (u >= 0) && (v >= 0) && (w >= 0);
+    return (u > 0) && (v > 0) && (w > 0);
 }
 
 
