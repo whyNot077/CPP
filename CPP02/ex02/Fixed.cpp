@@ -1,5 +1,7 @@
 #include "Fixed.hpp"
 
+static const int m_fractional_bits = 8;
+
 Fixed::Fixed() : m_value(0) { }
 
 Fixed::Fixed(const Fixed &fixed) {
@@ -69,19 +71,26 @@ bool Fixed::operator!=(const Fixed &fixed) const {
 }
 
 Fixed Fixed::operator+(const Fixed &fixed) const {
-    return Fixed(toFloat() + fixed.toFloat());
+    return Fixed(this->getRawBits() + fixed.getRawBits());
 }
 
 Fixed Fixed::operator-(const Fixed &fixed) const {
-    return Fixed(toFloat() - fixed.toFloat());
+    return Fixed(this->getRawBits() - fixed.getRawBits());
 }
 
 Fixed Fixed::operator*(const Fixed &fixed) const {
-    return Fixed(toFloat() * fixed.toFloat());
+    int64_t result = (int64_t)this->getRawBits() * (int64_t)fixed.getRawBits();
+    result >>= m_fractional_bits;
+    return Fixed((int32_t)result);
 }
 
 Fixed Fixed::operator/(const Fixed &fixed) const {
-    return Fixed(toFloat() / fixed.toFloat());
+    if (fixed.getRawBits() == 0) {
+        return Fixed(-1);
+    }
+
+    int64_t result = ((int64_t)this->getRawBits() << m_fractional_bits) / (int64_t)fixed.getRawBits(); // 64비트 정수로 확장 후 나눗셈
+    return Fixed((int32_t)result);
 }
 
 
@@ -90,8 +99,8 @@ Fixed& Fixed::operator++() {
     return *this;
 }
 
-Fixed Fixed::operator++(int) {
-    Fixed tmp(*this);
+Fixed const Fixed::operator++(int) {
+    const Fixed tmp(*this);
     ++(*this);
     return tmp;
 }
@@ -101,8 +110,8 @@ Fixed& Fixed::operator--() {
     return *this;
 }
 
-Fixed Fixed::operator--(int) {
-    Fixed tmp(*this);
+Fixed const Fixed::operator--(int) {
+    const Fixed tmp(*this);
     --(*this);
     return tmp;
 }

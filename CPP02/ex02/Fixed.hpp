@@ -17,7 +17,6 @@
 class Fixed {
 private:
     int m_value;
-    static const int m_fractional_bits = 8;
 
 public:
     Fixed();
@@ -39,9 +38,9 @@ public:
     Fixed operator/(const Fixed &fixed) const;
 
     Fixed& operator++();         // prefix ++. 서로 다른 매개변수 가져야 함
-    Fixed operator++(int dummy); // postfix ++
+    const Fixed operator++(int dummy); // postfix ++
     Fixed& operator--();         // prefix --
-    Fixed operator--(int dummy); // postfix --
+    const Fixed operator--(int dummy); // postfix --
 
     static Fixed &min(Fixed &a, Fixed &b);
     static const Fixed &min(const Fixed &a, const Fixed &b);
