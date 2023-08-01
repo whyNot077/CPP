@@ -12,6 +12,10 @@ FragTrap::~FragTrap() {
 }
 
 FragTrap::FragTrap(const FragTrap& other) : ClapTrap(other) {
+    m_name = other.m_name;
+    m_attack_damage = other.m_attack_damage;
+    m_hit_points = other.m_hit_points;
+    m_energy_points = other.m_energy_points;
     std::cout << CYAN << "FragTrap copy constructor called" << DEFAULT << std::endl;
 }
 

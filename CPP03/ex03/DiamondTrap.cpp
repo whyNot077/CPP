@@ -13,11 +13,12 @@ DiamondTrap::~DiamondTrap() {
     Print::PrintMessage("DiamondTrap " + m_name + " destructor called", RED);
 }
 
-DiamondTrap::DiamondTrap(DiamondTrap const &other) 
-    : ClapTrap(other), FragTrap(other), ScavTrap(other), \
-    m_name(other.m_name), m_hit_points(other.m_hit_points), \
-    m_energy_points(other.m_energy_points), m_attack_damage(other.m_attack_damage){
+DiamondTrap::DiamondTrap(DiamondTrap const &other) : ClapTrap(other), FragTrap(other), ScavTrap(other) {
     Print::PrintMessage("DiamondTrap copy constructor called", CYAN);
+    m_name = other.m_name;
+    m_hit_points = other.m_hit_points;
+    m_energy_points = other.m_energy_points;
+    m_attack_damage = other.m_attack_damage;
 }
 
 

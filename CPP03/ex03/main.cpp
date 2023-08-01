@@ -17,6 +17,7 @@ int main() {
 
     std::cout << "---------------------" << std::endl;
     diamondTrap.whoAmI();
+    diamondTrap.PrintStats();
 
     std::cout << "---------------------" << std::endl;
     DiamondTrap new_diamond("new");
@@ -25,17 +26,20 @@ int main() {
     std::cout << "---------------------" << std::endl;
     DiamondTrap copy_diamond(new_diamond);
     copy_diamond.whoAmI();
+    copy_diamond.PrintStats();
 
     std::cout << "---------------------" << std::endl;
     DiamondTrap assign_diamond("assign");
     assign_diamond.whoAmI();
     assign_diamond = diamondTrap;
     assign_diamond.whoAmI();
+    assign_diamond.PrintStats();
 
     std::cout << "---------------------" << std::endl;
     assign_diamond.whoAmI();
     assign_diamond = new_diamond;
     assign_diamond.whoAmI();
+    assign_diamond.PrintStats();
     std::cout << "---------------------" << std::endl;
 
     return 0;

@@ -10,11 +10,15 @@
 #define TAKES " takes "
 #define REPAIRED " is repaired "
 
-ClapTrap::ClapTrap(std::string name) : m_name(name + "_clap_name"), m_hit_points(10), m_energy_points(10), m_attack_damage(0) {
+ClapTrap::ClapTrap(std::string name) : m_name(name), m_hit_points(10), m_energy_points(10), m_attack_damage(0) {
     std::cout << CLAPTRAP << m_name << CREATED << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap& other) : m_name(other.m_name), m_hit_points(other.m_hit_points), m_energy_points(other.m_energy_points), m_attack_damage(other.m_attack_damage) {
+ClapTrap::ClapTrap(const ClapTrap& other)
+    : m_name(other.m_name),
+      m_hit_points(other.m_hit_points),
+      m_energy_points(other.m_energy_points),
+      m_attack_damage(other.m_attack_damage) {
     std::cout << CLAPTRAP << m_name << COPIED << std::endl;
 }
 
