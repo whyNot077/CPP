@@ -21,5 +21,11 @@ int main()
     std::cout << "My type is " << YELLOW << wrongMeta->getType() << DEFAULT << std::endl;
     wrongCat->makeSound();
     wrongMeta->makeSound();
+
+    delete meta;
+    delete j;
+    delete i;
+    delete wrongMeta;
+    delete wrongCat;
     return 0;
 }
