@@ -14,5 +14,29 @@ int main() {
     for (int i = 0; i < 4; i++) {
         traps[i]->attack("some_target");
     }
+
+    std::cout << "---------------------" << std::endl;
+    diamondTrap.whoAmI();
+
+    std::cout << "---------------------" << std::endl;
+    DiamondTrap new_diamond("new");
+    new_diamond.whoAmI();
+
+    std::cout << "---------------------" << std::endl;
+    DiamondTrap copy_diamond(new_diamond);
+    copy_diamond.whoAmI();
+
+    std::cout << "---------------------" << std::endl;
+    DiamondTrap assign_diamond("assign");
+    assign_diamond.whoAmI();
+    assign_diamond = diamondTrap;
+    assign_diamond.whoAmI();
+
+    std::cout << "---------------------" << std::endl;
+    assign_diamond.whoAmI();
+    assign_diamond = new_diamond;
+    assign_diamond.whoAmI();
+    std::cout << "---------------------" << std::endl;
+
     return 0;
 }

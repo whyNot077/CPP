@@ -5,7 +5,7 @@
 #include "Print.hpp"
 
 class ClapTrap {
-private:
+protected:
     std::string m_name;
     int m_hit_points;
     int m_energy_points;
@@ -16,21 +16,21 @@ public:
     // Orthodox canonical class form
     ClapTrap(std::string name);
     ClapTrap(const ClapTrap& other);
-    ~ClapTrap();
+    virtual ~ClapTrap();
     ClapTrap& operator=(const ClapTrap& other);
 
     // Cause its target to lose <attack damage> hit points.
     // It costs 1 energy point.
-    void attack(std::string const & target);
+    virtual void attack(std::string const & target);
 
     // Decrease hit points by <amount>.
     void takeDamage(unsigned int amount);
 
     // Increase hit points by <amount> up to a maximum of <hit points>.
     // It costs 1 energy point.
-    void beRepaired(unsigned int amount);
+    virtual void beRepaired(unsigned int amount);
 
-    void PrintStats() const;
+    void PrintStats();
 };
 
 #endif

@@ -11,21 +11,15 @@ FragTrap::~FragTrap() {
     std::cout << RED << "FragTrap destructor called" << DEFAULT << std::endl;
 }
 
-FragTrap::FragTrap(FragTrap const &other) : ClapTrap(other) {
-    if (this != &other)
-    {
-        *this = other;
-    }
+FragTrap::FragTrap(const FragTrap& other) : ClapTrap(other) {
     std::cout << CYAN << "FragTrap copy constructor called" << DEFAULT << std::endl;
 }
 
-FragTrap &FragTrap::operator=(FragTrap const &other) {
+FragTrap& FragTrap::operator=(const FragTrap& other) {
     std::cout << CYAN << "FragTrap assignation operator called" << DEFAULT << std::endl;
     if (this != &other) {
+        ClapTrap::operator=(other);
         m_name = other.m_name;
-        m_hit_points = other.m_hit_points;
-        m_energy_points = other.m_energy_points;
-        m_attack_damage = other.m_attack_damage;
     }
     return *this;
 }

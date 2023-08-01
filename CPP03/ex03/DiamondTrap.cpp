@@ -13,21 +13,21 @@ DiamondTrap::~DiamondTrap() {
     Print::PrintMessage("DiamondTrap " + m_name + " destructor called", RED);
 }
 
-DiamondTrap::DiamondTrap(DiamondTrap const &other) : ClapTrap(other), FragTrap(other), ScavTrap(other) {
-    if (this != &other)
-    {
-        *this = other;
-    }
+DiamondTrap::DiamondTrap(DiamondTrap const &other) 
+    : ClapTrap(other), FragTrap(other), ScavTrap(other), \
+    m_name(other.m_name), m_hit_points(other.m_hit_points), \
+    m_energy_points(other.m_energy_points), m_attack_damage(other.m_attack_damage){
     Print::PrintMessage("DiamondTrap copy constructor called", CYAN);
 }
+
 
 DiamondTrap &DiamondTrap::operator=(DiamondTrap const &other) {
     Print::PrintMessage("DiamondTrap assignation operator called", CYAN);
     if (this != &other) {
+        ClapTrap::operator=(other);
+        FragTrap::operator=(other);
+        ScavTrap::operator=(other);
         m_name = other.m_name;
-        m_hit_points = other.m_hit_points;
-        m_energy_points = other.m_energy_points;
-        m_attack_damage = other.m_attack_damage;
     }
     return *this;
 }
@@ -54,5 +54,5 @@ void DiamondTrap::attack(std::string const & target) {
 
 void DiamondTrap::whoAmI() {
     std::cout << "My name is " << GREEN << m_name << DEFAULT <<\
-         " and my ClapTrap name is " << BLUE << FragTrap::m_name << DEFAULT << std::endl;
+         " and my ClapTrap name is " << BLUE << ClapTrap::m_name << DEFAULT << std::endl;
 }
