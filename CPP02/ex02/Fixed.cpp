@@ -79,20 +79,20 @@ Fixed Fixed::operator-(const Fixed &fixed) const {
 }
 
 Fixed Fixed::operator*(const Fixed &fixed) const {
-    int64_t result = (int64_t)this->getRawBits() * (int64_t)fixed.getRawBits();
+    int64_t result = static_cast<int64_t>(this->getRawBits()) * static_cast<int64_t>(fixed.getRawBits());
     result >>= m_fractional_bits;
-    return Fixed((int32_t)result);
+    return Fixed(static_cast<int32_t>(result));
 }
 
 Fixed Fixed::operator/(const Fixed &fixed) const {
     if (fixed.getRawBits() == 0) {
         return Fixed(-1);
     }
-    int64_t inverse = ((int64_t)1 << (2 * m_fractional_bits)) / (int64_t)fixed.getRawBits();
-    int64_t result = (int64_t)this->getRawBits() * inverse;
+    int64_t inverse = (static_cast<int64_t>(1) << (2 * m_fractional_bits)) / static_cast<int64_t>(fixed.getRawBits());
+    int64_t result = static_cast<int64_t>(this->getRawBits()) * inverse;
     result >>= m_fractional_bits;
 
-    return Fixed((int32_t)result);
+    return Fixed(static_cast<int32_t>(result));
 }
 
 Fixed& Fixed::operator++() {
