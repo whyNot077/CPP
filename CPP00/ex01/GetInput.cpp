@@ -44,7 +44,6 @@ std::string GetInput::IgnoreEscapeSequences(const std::string& str) {
     return newStr;
 }
 
-
 void GetInput::ClearBuffer() {
     std::cin.clear();
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');

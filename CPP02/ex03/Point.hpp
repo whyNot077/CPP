@@ -22,13 +22,19 @@ private:
 public:
     Point();
     Point(const Point &point);
+    Point(const Fixed x, const Fixed y);
     Point(const float x, const float y);
     ~Point();
 
     Point &operator=(const Point &point);
+    Point operator-(const Point &point) const;
+    Fixed operator*(const Point &point) const;
 
     const Fixed getX(void) const;
     const Fixed getY(void) const;
 };
+
+bool bsp( Point const &a, Point const &b, Point const &c, Point const &point);
+bool is_triangle(Point const &a, Point const &b, Point const &c);
 
 #endif

@@ -8,6 +8,10 @@
 */*/harl
 */*/harlFilter
 */*/fixed
+*/*/claptrap
+*/*/scavtrap
+*/*/fragtrap
+*/*/diamondtrap
 *.o
 *.d
 .DS_Store
