@@ -12,7 +12,7 @@ void print_max(const Fixed &a, const Fixed &b) {
 }
 
 int main() {
-    Fixed a(10);
+    Fixed a;
     Fixed const b(Fixed(100));
 
     std::cout << a << std::endl;

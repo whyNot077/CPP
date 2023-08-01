@@ -88,11 +88,12 @@ Fixed Fixed::operator/(const Fixed &fixed) const {
     if (fixed.getRawBits() == 0) {
         return Fixed(-1);
     }
+    int64_t inverse = ((int64_t)1 << (2 * m_fractional_bits)) / (int64_t)fixed.getRawBits();
+    int64_t result = (int64_t)this->getRawBits() * inverse;
+    result >>= m_fractional_bits;
 
-    int64_t result = ((int64_t)this->getRawBits() << m_fractional_bits) / (int64_t)fixed.getRawBits(); // 64비트 정수로 확장 후 나눗셈
     return Fixed((int32_t)result);
 }
-
 
 Fixed& Fixed::operator++() {
     ++m_value;
