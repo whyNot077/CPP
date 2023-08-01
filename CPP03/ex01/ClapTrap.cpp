@@ -14,7 +14,11 @@ ClapTrap::ClapTrap(std::string name) : m_name(name), m_hit_points(10), m_energy_
     std::cout << CLAPTRAP << m_name << CREATED << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap& other) : m_name(other.m_name), m_hit_points(other.m_hit_points), m_energy_points(other.m_energy_points), m_attack_damage(other.m_attack_damage) {
+ClapTrap::ClapTrap(const ClapTrap& other)
+    : m_name(other.m_name),
+      m_hit_points(other.m_hit_points),
+      m_energy_points(other.m_energy_points),
+      m_attack_damage(other.m_attack_damage) {
     std::cout << CLAPTRAP << m_name << COPIED << std::endl;
 }
 

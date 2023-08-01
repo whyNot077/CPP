@@ -12,6 +12,10 @@ ScavTrap::~ScavTrap() {
 }
 
 ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other) {
+    m_name = other.m_name;
+    m_hit_points = other.m_hit_points;
+    m_energy_points = other.m_energy_points;
+    m_attack_damage = other.m_attack_damage;
     Print::PrintMessage("ScavTrap copy constructor called", GREEN);
 }
 
@@ -19,15 +23,18 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
     Print::PrintMessage("ScavTrap assignment operator called", GREEN);
     if (this != &other) {
         ClapTrap::operator=(other);
+        m_name = other.m_name;
     }
     return *this;
 }
 
 void ScavTrap::attack(std::string const & target) {
+    m_energy_points -= 1;
     std::cout << YELLOW << "ScavTrap " << DEFAULT << m_name << " attacks " << target << " causing " << BLUE << m_attack_damage << DEFAULT << " points of damage!" << std::endl;
 }
 
 void ScavTrap::beRepaired(unsigned int amount) {
+    m_energy_points -= 1;
     std::cout << YELLOW << "ScavTrap " << DEFAULT << m_name << " has been repaired by " << BLUE << amount << DEFAULT << " points!" << std::endl;
 }
 

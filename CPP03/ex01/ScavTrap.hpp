@@ -6,6 +6,7 @@
 
 class ScavTrap : public ClapTrap {
 public:
+// orthodox canonical class form
     ScavTrap(std::string name);
     ~ScavTrap();
     ScavTrap(const ScavTrap& other);

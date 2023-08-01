@@ -33,6 +33,9 @@ int main() {
     std::cout << b << std::endl;
     print_this(b);
 
+    a = Fixed(2.5f);
+    std::cout << "\na and b are " << CYAN << a << DEFAULT << " and " << CYAN << b << DEFAULT << std::endl;
+    std::cout << "I will do arithmetic operation with a and b\n" << std::endl;
     std::cout << a + b << std::endl;
     print_this(a + b);
 
@@ -43,7 +46,7 @@ int main() {
     print_this(a * b);
 
     std::cout << a / b << std::endl;
-    print_this(a / b);
+    print_this( a / b);
 
     std::cout << Fixed::max(a, b) << std::endl;
     print_max(a, b);
