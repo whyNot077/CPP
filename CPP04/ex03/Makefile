@@ -1,13 +1,13 @@
 CC              = c++ -std=c++98
 CFLAGS          = -Wall -Wextra -Werror -MMD
-NAME            = animal
+NAME            = materia
 RM              = rm -f
 
-EXEC            = animal
-SOURCES			= main.cpp Animal.cpp Dog.cpp Cat.cpp Brain.cpp
+EXEC            = materia
+SOURCES			= $(wildcard *.cpp)
 OBJECTS         = $(SOURCES:.cpp=.o)
 
-HEADER          = Animal.hpp Dog.hpp Cat.hpp Brain.hpp
+HEADER          = $(wildcard *.hpp)
 
 all: $(NAME)
 
