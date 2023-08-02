@@ -12,6 +12,8 @@
 */*/scavtrap
 */*/fragtrap
 */*/diamondtrap
+*/*/animal
+*/*/materia
 *.o
 *.d
 .DS_Store
