@@ -1,5 +1,7 @@
 #include "Cat.hpp"
 
+const int talkative = 5;
+
 Cat::Cat() : Animal() {
     m_type = "Cat";
     m_brain = new Brain();
@@ -22,13 +24,27 @@ Cat& Cat::operator=(const Cat& other) {
     return *this;
 }
 
-
 Cat::~Cat() {
     delete m_brain;
     std::cout << "Cat destructor called" << std::endl;
 }
 
 void Cat::makeSound() const {
-    std::cout << CYAN << "Meow meow" << DEFAULT << std::endl;
+    if (m_brain->getIdea(0) == "") {
+        std::cout << CYAN << "Meow meow" << DEFAULT << std::endl;
+        return;
+    }
+    for (int i = 0; i < talkative; i++) {
+        std::cout << CYAN << m_brain->getIdea(i) << DEFAULT << std::endl;
+    }
 }
 
+void Cat::think() const {
+    int count;
+    std::string *ideas = split(CAT_IDEA, ',', count);
+    for (int i = 0; i < 100; i++) {
+        int index = std::rand() % count;
+        m_brain->setIdea(i, ideas[index]);
+    }
+    delete[] ideas;
+}

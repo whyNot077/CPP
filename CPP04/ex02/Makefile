@@ -4,10 +4,10 @@ NAME            = animal
 RM              = rm -f
 
 EXEC            = animal
-SOURCES			= main.cpp Animal.cpp Dog.cpp Cat.cpp Brain.cpp
+SOURCES			= $(wildcard *.cpp)
 OBJECTS         = $(SOURCES:.cpp=.o)
 
-HEADER          = Animal.hpp Dog.hpp Cat.hpp Brain.hpp
+HEADER          = $(wildcard *.hpp)
 
 all: $(NAME)
 

@@ -27,9 +27,17 @@ Brain& Brain::operator=(const Brain& other) {
 }
 
 void Brain::setIdea(int index, std::string idea) {
+    if (index < 0 || index >= 100) {
+        std::cout << "Invalid index" << std::endl;
+        return;
+    }
     m_ideas[index] = idea;
 }
 
 std::string Brain::getIdea(int index) const {
+    if (index < 0 || index >= 100) {
+        std::cout << "Invalid index" << std::endl;
+        return "";
+    }
     return m_ideas[index];
 }

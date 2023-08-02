@@ -1,5 +1,7 @@
 #include "Dog.hpp"
 
+static int talkative = 5;
+
 Dog::Dog() : Animal(){
     m_type = "Dog";
     m_brain = new Brain();
@@ -28,5 +30,21 @@ Dog& Dog::operator=(const Dog& other) {
 }
 
 void Dog::makeSound() const {
-    std::cout << BLUE << "Woof Woof!" << DEFAULT << std::endl;
+    if (m_brain->getIdea(0) == "") {
+        std::cout << BLUE << "Woof Woof!" << DEFAULT << std::endl;
+        return;
+    }
+    for (int i = 0; i < talkative; i++) {
+        std::cout << BLUE << m_brain->getIdea(i) << DEFAULT << std::endl;
+    }
+}
+
+void Dog::think() const {
+    int count;
+    std::string *ideas = split(DOG_IDEA, ',', count);
+    for (int i = 0; i < 100; i++) {
+        int index = std::rand() % count;
+        m_brain->setIdea(i, ideas[index]);
+    }
+    delete[] ideas;
 }

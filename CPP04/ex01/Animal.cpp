@@ -26,3 +26,7 @@ void Animal::makeSound() const {
 std::string Animal::getType() const {
     return m_type;
 }
+
+void Animal::think() const {
+    std::cout << "Animal think called" << std::endl;
+}
