@@ -21,7 +21,7 @@ private:
 public:
     Brain();
     Brain(const Brain& other);
-    virtual ~Brain();
+    ~Brain();
     Brain& operator=(const Brain& other);
     void setIdea(int index, std::string idea);
     std::string getIdea(int index) const;

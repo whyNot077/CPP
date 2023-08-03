@@ -14,14 +14,14 @@
 #define WHITE "\033[37m"
 #define DEFAULT "\033[0m"
 
-class Brain{
+class Brain {
 private:
     std::string m_ideas[100];
 
 public:
     Brain();
     Brain(const Brain& other);
-    virtual ~Brain();
+    ~Brain();
     Brain& operator=(const Brain& other);
     void setIdea(int index, std::string idea);
     std::string getIdea(int index) const;

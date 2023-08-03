@@ -16,10 +16,10 @@ private:
 public:
     Dog();
     Dog(const Dog& other);
-    ~Dog();
+    virtual ~Dog();
     Dog& operator=(const Dog& other);
-    void makeSound() const;
-    void think() const;
+    virtual void makeSound() const;
+    virtual void think() const;
 };
 
 std::string* split(const std::string& str, char delim, int& count);

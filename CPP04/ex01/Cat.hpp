@@ -17,10 +17,10 @@ private:
 public:
     Cat();
     Cat(const Cat& other);
-    ~Cat();
+    virtual ~Cat();
     Cat& operator=(const Cat& other);
-    void makeSound() const;
-    void think() const;
+    virtual void makeSound() const;
+    virtual void think() const;
 };
 
 std::string* split(const std::string& str, char delim, int& count);
