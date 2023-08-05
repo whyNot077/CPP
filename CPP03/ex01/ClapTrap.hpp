@@ -10,6 +10,8 @@ protected:
     int m_hit_points;
     int m_energy_points;
     int m_attack_damage;
+    int m_max_hit_points;
+    bool check_invalid_action();
 
 public:
     // Hit points: 10, Energy points: 10, Attack damage: 0
@@ -19,6 +21,8 @@ public:
     virtual ~ClapTrap();
     ClapTrap& operator=(const ClapTrap& other);
 
+    bool attack_damage(void);
+    
     // Cause its target to lose <attack damage> hit points.
     // It costs 1 energy point.
     virtual void attack(std::string const & target);

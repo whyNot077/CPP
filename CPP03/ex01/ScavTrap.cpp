@@ -1,9 +1,14 @@
 #include "ScavTrap.hpp"
 
+static int max_hit_points = 100;
+static int max_energy_points = 50;
+static int max_attack_damage = 20;
+
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
-    m_hit_points = 100;
-    m_energy_points = 50;
-    m_attack_damage = 20;
+    m_hit_points = max_hit_points;
+    m_energy_points = max_energy_points;
+    m_attack_damage = max_attack_damage;
+    m_max_hit_points = max_hit_points;
     Print::PrintMessage("ScavTrap constructor called", GREEN);
 }
 
@@ -16,6 +21,7 @@ ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other) {
     m_hit_points = other.m_hit_points;
     m_energy_points = other.m_energy_points;
     m_attack_damage = other.m_attack_damage;
+    m_max_hit_points = other.m_max_hit_points;
     Print::PrintMessage("ScavTrap copy constructor called", GREEN);
 }
 
@@ -29,13 +35,9 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
 }
 
 void ScavTrap::attack(std::string const & target) {
-    m_energy_points -= 1;
-    std::cout << YELLOW << "ScavTrap " << DEFAULT << m_name << " attacks " << target << " causing " << BLUE << m_attack_damage << DEFAULT << " points of damage!" << std::endl;
-}
-
-void ScavTrap::beRepaired(unsigned int amount) {
-    m_energy_points -= 1;
-    std::cout << YELLOW << "ScavTrap " << DEFAULT << m_name << " has been repaired by " << BLUE << amount << DEFAULT << " points!" << std::endl;
+    if (!ClapTrap::attack_damage())
+        return ;
+    std::cout << "ScavTrap " << BLUE << m_name << DEFAULT << " attacks " << target << " causing " << BLUE << m_attack_damage << DEFAULT << " points of damage!" << std::endl;
 }
 
 void ScavTrap::guardGate() {

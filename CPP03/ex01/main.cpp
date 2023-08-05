@@ -4,20 +4,19 @@
 #include <iostream>
 
 int main() {
-    ClapTrap* clap = new ClapTrap("Clap");
     ScavTrap* scav = new ScavTrap("Scav");
-    ClapTrap* pointerToScav = scav;
-
-    Print::PrintMessage("Calling ClapTrap's attack:", YELLOW);
-    clap->attack("Target");
-
-    Print::PrintMessage("Calling ScavTrap's attack:", YELLOW);
-    scav->attack("Target");
-
-    Print::PrintMessage("Calling ClapTrap's attack with ScavTrap's pointer:", YELLOW);
-    pointerToScav->attack("Target");
-
-    delete clap;
+    for (int i = 0; i < 3; i++) {
+        scav->takeDamage(20);
+    }
+    scav->PrintStats();
+    for (int i = 0; i < 5; i++) {
+        scav->beRepaired(20);
+    }
+    scav->PrintStats();
+    for (int i = 0; i < 6; i++) {
+        scav->attack("enemy");
+    }
+    scav->PrintStats();
     delete scav;
     return 0;
 }
