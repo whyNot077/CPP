@@ -3,7 +3,7 @@
 #include "AMateria.hpp"
 #include "IMateriaSource.hpp"
 
-class MateriaSource : public IMateriaSource, public Ground {
+class MateriaSource : public IMateriaSource{
 public:
     MateriaSource();
     MateriaSource(const MateriaSource& other);
