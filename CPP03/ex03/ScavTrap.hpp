@@ -4,14 +4,16 @@
 #include <string>
 #include "ClapTrap.hpp"
 
-class ScavTrap : public ClapTrap {
+class ScavTrap : virtual public ClapTrap {
+private:
+    std::string m_scav_name;
 public:
 // orthodox canonical class form
     ScavTrap(std::string name);
-    ~ScavTrap();
+    virtual ~ScavTrap();
     ScavTrap(const ScavTrap& other);
     ScavTrap& operator=(const ScavTrap& other);
-    void attack(std::string const & target);
+    virtual void attack(std::string const & target);
     void guardGate();
 };
 

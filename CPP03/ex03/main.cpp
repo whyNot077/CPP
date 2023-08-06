@@ -1,46 +1,25 @@
 #include "ClapTrap.hpp"
-#include "FragTrap.hpp"
-#include "DiamondTrap.hpp"
 #include "ScavTrap.hpp"
+#include "DiamondTrap.hpp"
+#include "FragTrap.hpp"
+#include "Print.hpp"
+#include <iostream>
 
 int main() {
-    ClapTrap clapTrap("CT");
-    FragTrap fragTrap("FT");
-    ScavTrap scavTrap("ST");
-    DiamondTrap diamondTrap("DT");
-
-    ClapTrap* traps[] = { &clapTrap, &fragTrap, &diamondTrap, &scavTrap };
-
-    for (int i = 0; i < 4; i++) {
-        traps[i]->attack("some_target");
+    DiamondTrap* diamond = new DiamondTrap("diamond");
+    for (int i = 0; i < 3; i++) {
+        diamond->takeDamage(20);
     }
-
-    std::cout << "---------------------" << std::endl;
-    diamondTrap.whoAmI();
-    diamondTrap.PrintStats();
-
-    std::cout << "---------------------" << std::endl;
-    DiamondTrap new_diamond("new");
-    new_diamond.whoAmI();
-
-    std::cout << "---------------------" << std::endl;
-    DiamondTrap copy_diamond(new_diamond);
-    copy_diamond.whoAmI();
-    copy_diamond.PrintStats();
-
-    std::cout << "---------------------" << std::endl;
-    DiamondTrap assign_diamond("assign");
-    assign_diamond.whoAmI();
-    assign_diamond = diamondTrap;
-    assign_diamond.whoAmI();
-    assign_diamond.PrintStats();
-
-    std::cout << "---------------------" << std::endl;
-    assign_diamond.whoAmI();
-    assign_diamond = new_diamond;
-    assign_diamond.whoAmI();
-    assign_diamond.PrintStats();
-    std::cout << "---------------------" << std::endl;
-
+    diamond->PrintStats();
+    for (int i = 0; i < 5; i++) {
+        diamond->beRepaired(20);
+    }
+    diamond->PrintStats();
+    for (int i = 0; i < 6; i++) {
+        diamond->attack("enemy");
+    }
+    diamond->PrintStats();
+    diamond->whoAmI();
+    delete diamond;
     return 0;
 }

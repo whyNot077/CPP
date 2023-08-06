@@ -5,27 +5,20 @@
 #include <iostream>
 
 int main() {
-    ScavTrap* scav = new ScavTrap("Scav");
-    FragTrap* frag = new FragTrap("Frag");
-    ClapTrap* pointerToScav = scav;
-    ClapTrap* pointerToFrag = frag;
-    
-    Print::PrintMessage("FragTrap's attack:", BLACK);
-    frag->attack("Target");
-
-    Print::PrintMessage("ScavTrap's attack:", BLACK);
-    scav->attack("Target");
-
-    Print::PrintMessage("ClapTrap's attack with ScavTrap's pointer:", BLACK);
-    pointerToScav->attack("Target");
-
-    Print::PrintMessage("ClapTrap's attack with FragTrap's pointer:", BLACK);
-    pointerToFrag->attack("Target");
-
-    scav->PrintStats();
+    FragTrap* frag = new FragTrap("frag");
+    for (int i = 0; i < 3; i++) {
+        frag->takeDamage(20);
+    }
     frag->PrintStats();
-
-    delete scav;
+    for (int i = 0; i < 5; i++) {
+        frag->beRepaired(20);
+    }
+    frag->PrintStats();
+    for (int i = 0; i < 6; i++) {
+        frag->attack("enemy");
+    }
+    frag->PrintStats();
+    frag->highFivesGuys();
     delete frag;
     return 0;
 }
