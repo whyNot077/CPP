@@ -4,8 +4,9 @@
 #include <string>
 #include "AMateria.hpp"
 #include "ICharacter.hpp"
+#include "Ground.hpp"
 
-class Character : public ICharacter {
+class Character : public ICharacter, public Ground{
 public:
     Character();
     Character(std::string const & name);
@@ -17,5 +18,7 @@ public:
     virtual void unequip(int idx);
     virtual void use(int idx, ICharacter& target);
 };
+
+void copy_slots(AMateria* const source[4], AMateria* destination[4]);
 
 #endif
