@@ -17,10 +17,10 @@
 class Animal{
 protected:
     std::string m_type;
+    Animal() {}
+    Animal(const Animal& other) { *this = other; }
 
 public:
-    Animal();
-    Animal(const Animal& other);
     virtual ~Animal();
     Animal& operator=(const Animal& other);
     virtual void makeSound() const;
