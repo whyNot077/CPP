@@ -6,12 +6,12 @@ static int max_energy_points = 50;
 static int max_attack_damage = 30;
 
 DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name"), FragTrap(name), ScavTrap(name) {
-    Print::PrintMessage("DiamondTrap " + m_name + " constructor called", MAGENTA);
     m_diamond_name = name;
     m_hit_points = max_hit_points;
     m_energy_points = max_energy_points;
     m_attack_damage = max_attack_damage;
     m_max_hit_points = max_hit_points;
+    Print::PrintMessage("DiamondTrap " + m_diamond_name + " constructor called", MAGENTA);
 }
 
 DiamondTrap::~DiamondTrap() {

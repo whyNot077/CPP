@@ -3,10 +3,8 @@
 
 #include <string>
 #include <iostream>
-#include <sstream>
-#include <stdexcept>
 #include "color.hpp"
-#include "ScalarConverter.hpp"
-#include "NanException.hpp"
+#include "Data.hpp"
+#include "Serializer.hpp"
 
 #endif

@@ -15,6 +15,9 @@
 */*/animal
 */*/materia
 */*/bureau
+*/*/cast
+*/*/serializer
+*/*/base
 *.o
 *.d
 .DS_Store

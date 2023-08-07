@@ -3,12 +3,7 @@
 
 #include <string>
 #include <iostream>
-
-struct Data {
-    std::string s1;
-    int n;
-    std::string s2;
-};
+#include "Data.hpp"
 
 class Serializer {
 private:
@@ -18,8 +13,8 @@ private:
     Serializer& operator=(const Serializer& copy) { (void)copy; return *this;}
 
 public:
-    uintptr_t serialize(Data* ptr);
-    Data* deserialize(uintptr_t raw);
+    static uintptr_t serialize(Data* ptr);
+    static Data* deserialize(uintptr_t raw);
 };
 
 

@@ -3,10 +3,11 @@
 
 #include <string>
 #include <iostream>
-#include <sstream>
-#include <stdexcept>
 #include "color.hpp"
-#include "ScalarConverter.hpp"
-#include "NanException.hpp"
+#include "Data.hpp"
+#include "Base.hpp"
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
 
 #endif

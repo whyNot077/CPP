@@ -69,18 +69,19 @@ void is_number(const std::string& str) {
 
 double ScalarConverter::ConvertDouble(const std::string& str) {
     is_number(str);
-    try {
-        double result = std::stod(str);
-        if (result < MIN_DOUBLE || result > MAX_DOUBLE) {
-            throw NotDouble();
-        }
-        return result;
-    } catch (const std::invalid_argument& e) {
-        throw NotDouble();
-    } catch (const std::out_of_range& e) {
+    std::stringstream ss(str);
+    double result;
+    ss >> result;
+
+    if (ss.fail() || !ss.eof()) {
         throw NotDouble();
     }
+    if (result < MIN_DOUBLE || result > MAX_DOUBLE) {
+        throw NotDouble();
+    }
+    return result;
 }
+
 
 void ScalarConverter::PrintDouble(double d) {
     std::cout << std::fixed;
