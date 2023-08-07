@@ -12,7 +12,7 @@ private:
     int m_attack_damage;
     int m_max_hit_points;
     bool check_invalid_action();
-
+    Claptrap() {}
 public:
     // Hit points: 10, Energy points: 10, Attack damage: 0
     // Orthodox canonical class form

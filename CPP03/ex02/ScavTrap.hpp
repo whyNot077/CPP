@@ -8,6 +8,7 @@ class ScavTrap : public ClapTrap {
 public:
 // orthodox canonical class form
     ScavTrap(std::string name);
+    ScavTrap() {}
     ~ScavTrap();
     ScavTrap(const ScavTrap& other);
     ScavTrap& operator=(const ScavTrap& other);

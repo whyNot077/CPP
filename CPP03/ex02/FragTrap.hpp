@@ -6,6 +6,8 @@
 
 class FragTrap : public ClapTrap {
 public:
+// orthodox canonical class form
+    FragTrap() {}
     FragTrap(std::string name);
     FragTrap(const FragTrap& other);
     virtual ~FragTrap();

@@ -12,6 +12,7 @@ private:
 
 public:
     DiamondTrap(std::string name);
+    DiamondTrap() {}
     ~DiamondTrap();
     DiamondTrap(const DiamondTrap& other);
     DiamondTrap& operator=(const DiamondTrap& other);

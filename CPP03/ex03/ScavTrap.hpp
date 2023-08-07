@@ -11,6 +11,7 @@ public:
 // orthodox canonical class form
     ScavTrap(std::string name);
     virtual ~ScavTrap();
+    ScavTrap() {}
     ScavTrap(const ScavTrap& other);
     ScavTrap& operator=(const ScavTrap& other);
     virtual void attack(std::string const & target);
