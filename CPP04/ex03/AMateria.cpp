@@ -14,7 +14,3 @@ void AMateria::use(ICharacter& target) {
     (void)target;
     std::cout << "AMateria use function called" << std::endl;
 }
-
-AMateria* AMateria::clone() const {
-    return new AMateria(*this);
-}
