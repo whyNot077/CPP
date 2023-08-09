@@ -18,6 +18,9 @@
 */*/cast
 */*/serializer
 */*/base
+*/*/whatever
+*/*/iter
+*/*/array
 *.o
 *.d
 .DS_Store
