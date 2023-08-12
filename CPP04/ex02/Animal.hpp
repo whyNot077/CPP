@@ -21,11 +21,11 @@ protected:
     Animal(const Animal& other) { *this = other; }
 
 public:
-    virtual ~Animal();
+    virtual ~Animal() {}
     Animal& operator=(const Animal& other);
-    virtual void makeSound() const;
+    virtual void makeSound() const = 0;
     std::string getType() const;
-    virtual void think() const;
+    virtual void think() const = 0;
 };
 
 #endif
