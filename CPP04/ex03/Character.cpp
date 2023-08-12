@@ -28,6 +28,10 @@ Character& Character::operator=(const Character& other) {
 
 Character::~Character() {
     std::cout << "Character destructor called" << std::endl;
+    for (int i = 0; i < 4; i++) {
+        if (m_slot[i] != NULL)
+            delete m_slot[i];
+    }
 }
 
 std::string const& Character::getName() const {
@@ -40,7 +44,6 @@ void Character::equip(AMateria* m) {
     for (int i = 0; i < 4; i++) {
         if (m_slot[i] == NULL) {
             m_slot[i] = m;
-            delete m;
             return;
         }
     }
@@ -52,6 +55,8 @@ void Character::unequip(int idx) {
     if (idx < 0 || idx >= 4)
         return;
     std::cout << "You unequip " << BLUE << m_slot[idx]->getType() << DEFAULT << std::endl;
+    addMateria(m_slot[idx]);
+    m_slot[idx] = NULL;
 }
 
 void Character::use(int idx, ICharacter& target) {
