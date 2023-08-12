@@ -71,19 +71,22 @@ bool Fixed::operator!=(const Fixed &fixed) const {
 }
 
 Fixed Fixed::operator+(const Fixed &fixed) const {
-    return Fixed(this->getRawBits() + fixed.getRawBits());
+    int64_t result = static_cast<int64_t>(this->getRawBits()) + static_cast<int64_t>(fixed.getRawBits());
+    float a = static_cast<float>(result) / (1 << m_fractional_bits);
+    return Fixed(a);
 }
 
 Fixed Fixed::operator-(const Fixed &fixed) const {
-    return Fixed(this->getRawBits() - fixed.getRawBits());
+    int64_t result = static_cast<int64_t>(this->getRawBits()) - static_cast<int64_t>(fixed.getRawBits());
+    float a = static_cast<float>(result) / (1 << m_fractional_bits);
+    return Fixed(a);
 }
 
 Fixed Fixed::operator*(const Fixed &fixed) const {
-    int64_t a = static_cast<int64_t>(this->getRawBits());
-    int64_t b = static_cast<int64_t>(fixed.getRawBits());
-    int64_t result = a * b;
-    result >>= m_fractional_bits;
-    return Fixed(static_cast<int32_t>(result));
+    int64_t result = static_cast<int64_t>(this->getRawBits()) * static_cast<int64_t>(fixed.getRawBits());
+    result /= (1 << m_fractional_bits);
+    result /= (1 << m_fractional_bits);
+    return Fixed(static_cast<float>(result));
 }
 
 Fixed Fixed::operator/(const Fixed &fixed) const {
@@ -93,9 +96,8 @@ Fixed Fixed::operator/(const Fixed &fixed) const {
     int64_t dividend = static_cast<int64_t>(this->getRawBits()) << m_fractional_bits;
     int64_t divisor = static_cast<int64_t>(fixed.getRawBits());
     int64_t result = dividend / divisor;
-    return Fixed(static_cast<int32_t>(result));
+    return Fixed(static_cast<float>(result) / (1 << m_fractional_bits));
 }
-
 
 Fixed& Fixed::operator++() {
     ++m_value;
