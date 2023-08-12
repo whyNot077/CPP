@@ -1,10 +1,12 @@
 #include "includes.hpp"
 
-Character::Character() : ICharacter(), Ground(){ }
+Character::Character() : Ground(){ }
 
-Character::Character(std::string const & name) : ICharacter(name), Ground(){ }
+Character::Character(std::string const & name) : Ground() {
+    m_name = name;
+}
 
-Character::Character(const Character& other) : ICharacter(other), Ground(other) {
+Character::Character(const Character& other) : Ground(other) {
     m_name = other.m_name;
     copy_slots(other.m_slot, m_slot);
 }
