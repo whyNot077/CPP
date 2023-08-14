@@ -25,9 +25,4 @@ class Intern {
         };
 };
 
-struct FormMaker {
-    const char* name;
-    AForm* (*createFunction)(const std::string&);
-};
-
 #endif
