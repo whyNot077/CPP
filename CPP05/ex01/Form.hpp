@@ -21,14 +21,6 @@ public:
     Form(const Form& other);
     ~Form();
     Form& operator=(const Form& other);
-    class GradeTooHighException : public std::exception {
-    public:
-        virtual const char* what() const throw();
-    };
-    class GradeTooLowException : public std::exception {
-    public:
-        virtual const char* what() const throw();
-    };
     const std::string& getName() const;
 
     // change m_signed value to true
@@ -38,6 +30,18 @@ public:
 
     // if bureaucrat's grade is higher than m_signGrade, can sign the form
     void beSigned(const Bureaucrat& bureaucrat);
+    class GradeTooHighException : public std::exception {
+    public:
+        virtual const char* what() const throw();
+    };
+    class GradeTooLowException : public std::exception {
+    public:
+        virtual const char* what() const throw();
+    };
+    class AlreadySignedException : public std::exception {
+    public:
+        virtual const char* what() const throw();
+    };
 };
 
 std::ostream& operator<<(std::ostream& out, const Form& form);

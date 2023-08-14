@@ -12,6 +12,8 @@ int main()
     try {
         robot = intern.makeForm("robotomy request", "show me the money");
         Bureaucrat Conan("Conan", 1);
+        Conan.executeForm(*robot);
+        Conan.signForm(*robot);
         Conan.signForm(*robot);
         Conan.executeForm(*robot);
         intern.makeForm("presidential pardon", "power overwelming");

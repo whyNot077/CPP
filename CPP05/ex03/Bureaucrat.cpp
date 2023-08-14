@@ -65,20 +65,17 @@ void Bureaucrat::signForm(AForm& form) const {
     try {
         form.beSigned(*this);
         std::cout << BLUE <<  m_name << " signed " << form.getName() << DEFAULT << std::endl;
-    } catch (AForm::GradeTooLowException& e) {
+    } catch (std::exception& e) {
         std::cout << RED << m_name << DEFAULT << " couldn't sign " << \
             form.getName() << " because " << RED << e.what() << DEFAULT << std::endl;
-    } 
+    }
 }
 
 void Bureaucrat::executeForm(const AForm& form) const {
     try {
         form.execute(*this);
         std::cout << BLUE << m_name << " executed " << form.getName() << DEFAULT << std::endl;
-    } catch (AForm::GradeTooLowException& e) {
-        std::cout << RED << m_name << DEFAULT << " couldn't execute " << \
-            form.getName() << " because " << RED << e.what() << DEFAULT << std::endl;
-    } catch (AForm::GradeTooHighException& e) {
+    } catch (std::exception& e) {
         std::cout << RED << m_name << DEFAULT << " couldn't execute " << \
             form.getName() << " because " << RED << e.what() << DEFAULT << std::endl;
     }
