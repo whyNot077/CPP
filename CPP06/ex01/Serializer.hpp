@@ -3,18 +3,19 @@
 
 #include <string>
 #include <iostream>
+#include <cstdint>
 #include "Data.hpp"
 
 class Serializer {
 private:
     Serializer() {}
     ~Serializer() {}
-    Serializer(const Serializer& copy) { (void)copy; }
-    Serializer& operator=(const Serializer& copy) { (void)copy; return *this;}
+    Serializer(const Serializer& copy);
+    Serializer& operator=(const Serializer& copy);
 
 public:
-    static uintptr_t serialize(Data* ptr);
-    static Data* deserialize(uintptr_t raw);
+    static unsigned long serialize(Data* ptr);
+    static Data* deserialize(unsigned long raw);
 };
 
 

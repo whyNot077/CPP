@@ -3,6 +3,8 @@
 
 #include <string>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "color.hpp"
 #include "Data.hpp"
 #include "Base.hpp"

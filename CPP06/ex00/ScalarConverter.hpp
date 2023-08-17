@@ -5,6 +5,7 @@
 #include <iostream>
 #include <sstream>
 #include <climits>
+#include <cstdlib>
 #include "color.hpp"
 
 #define NON_DISPLAYABLE "Non displayable"
@@ -25,8 +26,8 @@ public:
 
     ScalarConverter() {}
     ~ScalarConverter() {}
-    ScalarConverter(const ScalarConverter& copy) { (void)copy; }
-    ScalarConverter& operator=(const ScalarConverter& copy) { (void)copy; return *this;}
+    ScalarConverter(const ScalarConverter& copy);
+    ScalarConverter& operator=(const ScalarConverter& copy);
 
     static void convert(std::string str);
     static double ConvertDouble(const std::string& str);
@@ -34,18 +35,6 @@ public:
     static void ConvertInt(double str);
     static void ConvertFloat(double str);
     static void PrintDouble(double d);
-};
-
-class NotDouble : public std::exception {
-public:
-    virtual const char* what() const throw() {
-        std::cout << CHAR << IMPOSSIBLE << '\n';
-        std::cout << INT << IMPOSSIBLE << '\n';
-        std::cout << FLOAT << IMPOSSIBLE << '\n';
-        std::cout << DOUBLE << IMPOSSIBLE << '\n';
-        exit(1);
-        return IMPOSSIBLE;
-    }
 };
 
 #endif

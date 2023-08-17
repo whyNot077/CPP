@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include <cmath>
 
 #define NON_DISPLAYABLE "Non displayable"
 #define IMPOSSIBLE "impossible"
@@ -28,7 +29,7 @@ struct NanValue {
 private:
     NanException(){}
     ~NanException(){}
-    NanException(const NanException& copy){ (void)copy; }
+    NanException(const NanException& copy);
     NanException& operator=(const NanException& copy);
 
 public:

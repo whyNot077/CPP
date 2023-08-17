@@ -1,5 +1,15 @@
 #include "includes.hpp"
 
+ScalarConverter::ScalarConverter(const ScalarConverter& copy) {
+    (void)copy;
+}
+
+ScalarConverter& ScalarConverter::operator=(const ScalarConverter& copy) {
+    if (this == &copy) {
+        return *this;
+    }
+    return *this;
+}
 void ScalarConverter::ConvertChar(double str) {
     char c;
 

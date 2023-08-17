@@ -8,5 +8,6 @@
 #include "color.hpp"
 #include "ScalarConverter.hpp"
 #include "NanException.hpp"
+#include "NotDouble.hpp"
 
 #endif

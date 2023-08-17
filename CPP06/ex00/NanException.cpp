@@ -9,6 +9,10 @@ NanException::NanValue NanException::nan_value[] = {
     {MINUS_INFF, &NanException::PrintMinusInf},
 };
 
+NanException::NanException(const NanException& copy) {
+    (void)copy;
+}
+
 NanException& NanException::operator=(const NanException& copy) {
     if (this == &copy) {
         return *this;
