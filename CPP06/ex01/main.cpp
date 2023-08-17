@@ -8,7 +8,7 @@ int main() {
 
     std::cout << "Serializing and Deserializing data1:\n";
     std::cout << "Original pointer: " << BLUE << data1 << DEFAULT << "\n";
-    uintptr_t raw1 = Serializer::serialize(data1);
+    unsigned long long raw1 = Serializer::serialize(data1);
     std::cout << "Serialized (raw) pointer: " << raw1 << "\n";
     Data* deserializedData1 = Serializer::deserialize(raw1);
     std::cout << "Deserialized pointer: " << deserializedData1 << "\n";
@@ -17,10 +17,10 @@ int main() {
     std::cout << "Original s2: " << data1->s2 << " - Deserialized s2: " << deserializedData1->s2 << "\n";
 
     std::cout << "\nTesting with null pointer:\n";
-    Data* nullData = nullptr;
-    uintptr_t rawNull = Serializer::serialize(nullData);
+    Data* nullData = NULL;
+    unsigned long long rawNull = Serializer::serialize(nullData);
     Data* deserializedNull = Serializer::deserialize(rawNull);
-    if (deserializedNull == nullptr) {
+    if (deserializedNull == NULL) {
         std::cout << "Successfully handled null pointer.\n";
     } else {
         std::cout << "Null pointer test failed.\n";

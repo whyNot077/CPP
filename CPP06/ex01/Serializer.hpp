@@ -3,7 +3,6 @@
 
 #include <string>
 #include <iostream>
-#include <cstdint>
 #include "Data.hpp"
 
 class Serializer {
