@@ -21,12 +21,13 @@
 #define MAX_DOUBLE 1.797693e+308
 
 class ScalarConverter {
+private:
+    ScalarConverter() {}
+    ScalarConverter(const ScalarConverter& copy);
+
 public:
     typedef void (*ConvertAndPrintFunc)(double);
-
-    ScalarConverter() {}
     ~ScalarConverter() {}
-    ScalarConverter(const ScalarConverter& copy);
     ScalarConverter& operator=(const ScalarConverter& copy);
 
     static void convert(std::string str);

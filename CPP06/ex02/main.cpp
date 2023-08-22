@@ -5,6 +5,7 @@ int main() {
     Base *base = generate();
     identify(base);
     identify(*base);
+    identify(nullptr);
     delete base;
     return 0;
 }
