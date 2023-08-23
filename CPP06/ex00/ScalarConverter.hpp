@@ -24,12 +24,11 @@ class ScalarConverter {
 private:
     ScalarConverter() {}
     ScalarConverter(const ScalarConverter& copy);
-
-public:
-    typedef void (*ConvertAndPrintFunc)(double);
     ~ScalarConverter() {}
     ScalarConverter& operator=(const ScalarConverter& copy);
 
+public:
+    typedef void (*ConvertAndPrintFunc)(double);
     static void convert(std::string str);
     static double ConvertDouble(const std::string& str);
     static void ConvertChar(double str);

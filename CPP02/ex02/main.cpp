@@ -33,7 +33,7 @@ int main() {
     std::cout << b << std::endl;
     print_this(b);
 
-    a = Fixed(2.5f);
+    a = Fixed(25.f);
     std::cout << "\na and b are " << CYAN << a << DEFAULT << " and " << CYAN << b << DEFAULT << std::endl;
     std::cout << "I will do arithmetic operation with a and b\n" << std::endl;
     std::cout << "a + b = " << CYAN << a + b << DEFAULT << std::endl;
