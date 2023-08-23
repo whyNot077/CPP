@@ -9,6 +9,10 @@ OBJECTS         = $(SOURCES:.cpp=.o)
 
 HEADER          = $(wildcard *.hpp)
 
+ifdef DEBUG
+	CFLAGS += -g3
+endif
+
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
@@ -31,6 +35,9 @@ re:
 	@make all
 
 .PHONY: all clean fclean re
+
+debug: fclean
+	make DEBUG=1
 
 -include $(OBJECTS:.o=.d)
 
