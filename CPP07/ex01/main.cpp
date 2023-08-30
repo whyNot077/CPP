@@ -13,8 +13,10 @@ void print_array(T (&array)[N]) {
     std::cout << std::endl;
 }
 
-
 int main() {
+    const int cons_arrInt[] = {1, 2, 3, 4, 5};
+    print_array(cons_arrInt);
+
     int arrInt[] = {1, 2, 3, 4, 5};
     print_array(arrInt);
 
@@ -23,9 +25,6 @@ int main() {
 
     std::string arrString[] = {"Hello", "World", "!"};
     print_array(arrString);
-
-    float arrFloat[] = {1.1f, 2.2f, 3.3f, 4.4f, 5.5f};
-    print_array(arrFloat);
 
     return 0;
 }

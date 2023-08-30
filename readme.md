@@ -73,3 +73,32 @@ Data* Serializer::deserialize(uintptr_t raw) {
 }
 ```
 **What is serialization?**
+
+
+# CPP 07 : Template
+
+```c++
+template<typename T>
+```
+This line informs the compiler that a template is being declared and that T is a placeholder for a type that will be supplied later. The compiler doesn't replace T at runtime; rather, it generates the appropriate function or class definitions at compile-time based on the types used to instantiate the template.  
+
+```c++
+template<typename T>
+void swap(T& a, T& b) {
+    T temp = a;
+    a = b;
+    b = temp;
+}
+```
+This code defines a function template for the swap function. The compiler will generate different versions of this function for different types T as needed, during compile-time.  
+
+```c++
+template <typename T, typename Func>
+void iter(T* array, size_t length, Func func) {
+    for (size_t i = 0; i < length; ++i) {
+        func(array[i]);
+    }
+}
+```
+This code showcases a function template named iter, which not only takes an array of type T and its length but also another function func. It demonstrates that templates can be versatile and can take multiple type parameters.  
+
