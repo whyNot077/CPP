@@ -15,7 +15,7 @@ public:
     Array(Array const & src);
     Array & operator=(Array const & other);
     T & operator[](unsigned int index);
-    T const & operator[](unsigned int index) const;
+    // const T & operator[](unsigned int index) const;
     unsigned int size() const;
     ~Array();
 };
