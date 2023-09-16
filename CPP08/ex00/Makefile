@@ -1,7 +1,6 @@
-CC              = c++ -std=c++98
-CFLAGS          = -Wall -Wextra -Werror -MMD
-NAME            = iter
-RM              = rm -f
+CXXFLAGS		= -Wall -Wextra -Werror -MMD -std=c++98
+NAME			= iter
+RM				= rm -f
 
 EXEC            = iter
 SOURCES			= $(wildcard *.cpp)
@@ -9,14 +8,18 @@ OBJECTS         = $(SOURCES:.cpp=.o)
 
 HEADER          = $(wildcard *.hpp)
 
+ifdef DEBUG
+	CXXFLAGS += -g
+endif
+
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	@$(CC) $(CFLAGS) $(OBJECTS) -o $(EXEC)
+	@$(CXX) $(CXXFLAGS) $(OBJECTS) -o $(EXEC)
 	@echo -e "$(GREEN)$(EXEC) created!$(DEFAULT)"
 
 %.o: %.cpp $(HEADER)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	@$(RM) $(OBJECTS)
@@ -29,10 +32,13 @@ fclean: clean
 re:
 	@make fclean
 	@make all
+	
+debug: fclean
+	make DEBUG=1 -j
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re debug
 
--include $(OBJECTS:.o=.d)
+-include $(wildcard *.d)
 
 RED = \033[1;31m
 PINK = \033[1;35m

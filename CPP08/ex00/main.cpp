@@ -4,7 +4,7 @@
 
 int main() {
     std::vector<int> vec;
-    std::list<int> lst;
+    std::list<const int> lst;
 
     for (int i = 50; i > 0; i -= 10)
         vec.push_back(i);
@@ -15,8 +15,11 @@ int main() {
     try {
         std::vector<int>::const_iterator vecIt = easyfind(vec, 10);
         std::cout << "Find the index of 10 in vec: " << std::distance(vec.cbegin(), vecIt) << std::endl;
+
+        std::vector<int>::iterator vecIt2 = easyfind(vec, 30);
+        std::cout << "Find the index of 30 in vec: " << std::distance(vec.begin(), vecIt2) << std::endl;
         
-        std::list<int>::const_iterator lstIt = easyfind(lst, 10);
+        std::list<const int>::const_iterator lstIt = easyfind(lst, 10);
         std::cout << "Find the index of 10 in lst: " << std::distance(lst.cbegin(), lstIt) << std::endl;
         
         vecIt = easyfind(vec, 50);
