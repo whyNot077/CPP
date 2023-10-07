@@ -83,13 +83,41 @@ bool BitcoinExchange::IsValidDate(const std::string& date) const {
         std::cout << "Error: bad input => " << date << std::endl;
         return false;
     }
-    if (date.substr(5, 2) > "12") {
+    int year = std::stoi(date.substr(0, 4));
+    int month = std::stoi(date.substr(5, 2));
+    int day = std::stoi(date.substr(8, 2));
+
+    if (year < 2009 || year > 2024) {
         std::cout << "Error: bad input => " << date << std::endl;
         return false;
     }
-    if (date.substr(8, 2) > "31") {
+    if (month < 1 || month > 12) {
         std::cout << "Error: bad input => " << date << std::endl;
         return false;
+    }
+
+    switch (month) {
+        case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+            if (day < 1 || day > 31) {
+                std::cout << "Error: bad input => " << date << std::endl;
+                return false;
+            }
+            break;
+        case 4: case 6: case 9: case 11:
+            if (day < 1 || day > 30) {
+                std::cout << "Error: bad input => " << date << std::endl;
+                return false;
+            }
+            break;
+        case 2:
+            if (day < 1 || day > 28) {
+                std::cout << "Error: bad input => " << date << std::endl;
+                return false;
+            }
+            break;
+        default:
+            std::cout << "Error: bad input => " << date << std::endl;
+            return false;
     }
     return true;
 }
