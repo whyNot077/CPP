@@ -61,7 +61,7 @@ void BitcoinExchange::ParseData(const std::string& csv) {
         exit(1);
     }
     std::getline(file, line);
-    line.clear(); // 두 번째 줄부터 읽으려고 해 
+    line.clear();
     while (std::getline(file, line)) {
         std::string date = line.substr(0, line.find(','));
         std::string price = line.substr(line.find(',') + 1);
