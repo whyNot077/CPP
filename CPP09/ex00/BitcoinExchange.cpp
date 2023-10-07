@@ -132,7 +132,7 @@ void BitcoinExchange::PrintData(const std::string& date, const float value) {
         std::cout << date << " => " << value << " = " << value * data[date] << std::endl;
     } else {
         std::string closest = date;
-        while (data.find(closest) == data.end()) {
+        while (data.find(closest) == data.end() && data.find(closest) != data.begin()) {
             closest = GetPreviousDate(closest);
         }
         std::cout << date << " => " << value << " = " << value * data[closest] << std::endl;
