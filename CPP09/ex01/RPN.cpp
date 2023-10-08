@@ -21,8 +21,6 @@ static double Calculate(const double num1, const double num2, const char op) {
             return num1 / num2;
         case '*':
             return num1 * num2;
-        default:
-            return 0.0;
     }
 }
 
