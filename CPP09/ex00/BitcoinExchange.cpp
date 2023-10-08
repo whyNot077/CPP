@@ -44,12 +44,25 @@ BitcoinExchange::BitcoinExchange(std::string filename) : csv(csvData), filename(
             float divisor = std::pow(10.0f, decimal.length());
             value = std::atoi(integer.c_str()) + std::atoi(decimal.c_str()) / divisor;
         } else {
-            value = std::atoi(value_str.c_str());
+            if (value_str.length() > 4) {
+                std::cout << "Error: too large a number." << std::endl;
+                value = 1001;
+            } else if (value_str[0] == '-') {
+                std::cout << "Error: not a positive number." << std::endl;
+                value = -1;
+            } else {
+                value = std::atoi(value_str.c_str());
+            }
         }
         if (IsValidDate(date) && IsValidValue(value))
             PrintData(date, value);
     }
 }
+
+bool BitcoinExchange::IsValidValue(const float value) const {
+    return (value >= 0 && value <= 1000);
+}
+
 
 void BitcoinExchange::ParseData(const std::string& csv) {
     if (csv.substr(csv.find_last_of('.')) != ".csv") {
@@ -121,17 +134,6 @@ bool BitcoinExchange::IsValidDate(const std::string& date) const {
         default:
             std::cout << "Error: bad input => " << date << std::endl;
             return false;
-    }
-    return true;
-}
-
-bool BitcoinExchange::IsValidValue(const float value) const {
-    if (value < 0) {
-        std::cout << "Error: not a positive number." << std::endl;
-        return false;
-    } if (value > 1000) {
-        std::cout << "Error: too large a number." << std::endl;
-        return false;
     }
     return true;
 }
