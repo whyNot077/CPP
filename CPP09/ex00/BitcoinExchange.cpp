@@ -19,21 +19,19 @@ BitcoinExchange::~BitcoinExchange(void) {
 static float GetValue(const std::string& value_str) {
     float value = 0.0f;
     std::string::size_type pos = value_str.find('.');
-    if (pos != std::string::npos) {
+    if (value_str.length() > 4) {
+        std::cout << "Error: too large a number." << std::endl;
+        value = 1001;
+    } else if (value_str[0] == '-') {
+        std::cout << "Error: not a positive number." << std::endl;
+        value = -1;
+    } else if (pos != std::string::npos) {
         std::string integer = value_str.substr(0, pos);
         std::string decimal = value_str.substr(pos + 1);
         float divisor = std::pow(10.0f, decimal.length());
         value = std::atoi(integer.c_str()) + std::atoi(decimal.c_str()) / divisor;
     } else {
-        if (value_str.length() > 4) {
-            std::cout << "Error: too large a number." << std::endl;
-            value = 1001;
-        } else if (value_str[0] == '-') {
-            std::cout << "Error: not a positive number." << std::endl;
-            value = -1;
-        } else {
-            value = std::atoi(value_str.c_str());
-        }
+        value = std::atoi(value_str.c_str());
     }
     return value;
 }
