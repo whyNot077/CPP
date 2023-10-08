@@ -8,6 +8,9 @@
 #include <cstdlib>
 #include <cmath>
 class BitcoinExchange {
+public:
+    ~BitcoinExchange(void) {};
+    BitcoinExchange(std::string filename);
 private:
     std::string csv;
     std::string filename;
@@ -20,9 +23,6 @@ private:
     bool IsValidDate(const std::string& date) const;
     bool IsValidValue(const float value) const;
     void PrintData(const std::string& date, const float value);
-public:
-    ~BitcoinExchange(void);
-    BitcoinExchange(std::string filename);
 };
 
 #endif

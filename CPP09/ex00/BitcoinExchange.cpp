@@ -13,9 +13,6 @@ BitcoinExchange& BitcoinExchange::operator=(BitcoinExchange const& copy) {
     return *this;
 }
 
-BitcoinExchange::~BitcoinExchange(void) {
-}
-
 static float GetValue(const std::string& value_str) {
     float value = 0.0f;
     std::string::size_type pos = value_str.find('.');
