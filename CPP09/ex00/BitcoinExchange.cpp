@@ -9,7 +9,7 @@ BitcoinExchange& BitcoinExchange::operator=(BitcoinExchange const& copy) {
     if (this == &copy)
         return *this;
     filename = copy.filename;
-    data = move(copy.data);
+    data = copy.data;
     return *this;
 }
 
@@ -39,14 +39,13 @@ static float GetValue(const std::string& value_str) {
 BitcoinExchange::BitcoinExchange(std::string filename) : csv(csvData), filename(filename) {
     ParseData(csv);
     std::string date;
-    std::string line;
     std::ifstream file(filename);
     if (!file.is_open()) {
         std::cout << "Error: could not open file" << std::endl;
         exit(1);
     }
+    std::string line;
     std::getline(file, line);
-    line.clear();
     while (std::getline(file, line)) {
         std::string::size_type pos = line.find('|');
         if (pos == std::string::npos) {
