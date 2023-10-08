@@ -16,6 +16,10 @@ static double Calculate(const double num1, const double num2, const char op) {
         case '+':
             return num1 + num2;
         case '-':
+            if (num2 == 0) {
+                std::cout << "Error" << std::endl;
+                exit(1);
+            }
             return num1 - num2;
         case '/':
             return num1 / num2;
