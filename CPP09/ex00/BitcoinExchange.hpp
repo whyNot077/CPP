@@ -5,7 +5,8 @@
 #include <fstream>
 #include <iostream>
 #include <algorithm>
-
+#include <cstdlib>
+#include <cmath>
 class BitcoinExchange {
 private:
     std::string csv;

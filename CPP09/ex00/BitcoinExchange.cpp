@@ -19,7 +19,6 @@ BitcoinExchange::~BitcoinExchange(void) {
 BitcoinExchange::BitcoinExchange(std::string filename) : csv(csvData), filename(filename) {
     ParseData(csv);
     std::string date;
-    float value;
     std::string line;
     std::ifstream file(filename);
     if (!file.is_open()) {
@@ -35,14 +34,18 @@ BitcoinExchange::BitcoinExchange(std::string filename) : csv(csvData), filename(
             continue;
         }
         date = line.substr(0, pos - 1);
-        std::string value_str = line.substr(pos + 1);
-        try {
-            value = std::stof(value_str);
-        } catch (std::invalid_argument& e) {
-            std::cout << "Invalid float value: " << value_str << std::endl;
-            continue;
-        }
 
+        float value;
+        std::string value_str = line.substr(pos + 1);
+        pos = value_str.find('.');
+        if (pos != std::string::npos) {
+            std::string integer = value_str.substr(0, pos);
+            std::string decimal = value_str.substr(pos + 1);
+            float divisor = std::pow(10.0f, decimal.length());
+            value = std::atoi(integer.c_str()) + std::atoi(decimal.c_str()) / divisor;
+        } else {
+            value = std::atoi(value_str.c_str());
+        }
         if (IsValidDate(date) && IsValidValue(value))
             PrintData(date, value);
     }
