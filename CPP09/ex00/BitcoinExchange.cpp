@@ -75,14 +75,13 @@ void BitcoinExchange::ParseData(const std::string& csv) {
         exit(1);
     }
 
-    std::string line;
     std::ifstream file(csv);
     if (!file.is_open()) {
         std::cout << "Error: could not open .csv file" << std::endl;
         exit(1);
     }
+    std::string line;
     std::getline(file, line);
-    line.clear();
     while (std::getline(file, line)) {
         std::string date = line.substr(0, line.find(','));
         std::string price = line.substr(line.find(',') + 1);
