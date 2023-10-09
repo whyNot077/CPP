@@ -21,6 +21,11 @@
 */*/whatever
 */*/iter
 */*/array
+*/*/easyfind
+*/*/span
+*/*/stack
+*/*/btc
+*/*/RPN
 *.o
 *.d
 .DS_Store

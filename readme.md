@@ -101,4 +101,3 @@ void iter(T* array, size_t length, Func func) {
 }
 ```
 This code showcases a function template named iter, which not only takes an array of type T and its length but also another function func. It demonstrates that templates can be versatile and can take multiple type parameters.  
-
