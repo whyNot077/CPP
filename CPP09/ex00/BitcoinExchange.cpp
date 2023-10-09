@@ -88,6 +88,35 @@ void BitcoinExchange::ParseData(const std::string& csv) {
     }
 }
 
+static bool IsStrToInt(const std::string& str) {
+	std::string tmp = str;
+	bool positive = true;
+	if (str[0] == '-') {
+		positive = false;
+	}
+	if (positive == false) {
+		tmp = str.substr(1);
+	}
+	if (tmp.length() > 10) {
+		return false;
+	}
+
+	if (tmp.find_first_not_of("0123456789") != std::string::npos) {
+		return false;
+	}
+
+	if (tmp.length() < 10) {
+		return true;
+	} else if (tmp[0] > '2') {
+		return false;
+	}
+	tmp = tmp.substr(1);
+	if (std::atoi(tmp.c_str()) > 147483647) {
+		return false;
+	}
+	return true;
+}
+
 bool BitcoinExchange::IsValidDate(const std::string& date) const {
     if (date.size() != 10) {
         std::cout << "Error: bad input => " << date << std::endl;
@@ -97,9 +126,18 @@ bool BitcoinExchange::IsValidDate(const std::string& date) const {
         std::cout << "Error: bad input => " << date << std::endl;
         return false;
     }
-    int year = std::stoi(date.substr(0, 4));
-    int month = std::stoi(date.substr(5, 2));
-    int day = std::stoi(date.substr(8, 2));
+
+	std::string s_year = date.substr(0, 4);
+	std::string s_month = date.substr(5, 2);
+	std::string s_day = date.substr(8, 2);
+
+	if (!IsStrToInt(s_year) || !IsStrToInt(s_month) || !IsStrToInt(s_day)) {
+		std::cout << "Error: bad input => " << date << std::endl;
+		return false;
+	}
+    int year = std::atoi(s_year.c_str());
+    int month = std::atoi(s_month.c_str());
+    int day = std::atoi(s_day.c_str());
 
     if (year < 2009 || year > 2024) {
         std::cout << "Error: bad input => " << date << std::endl;
