@@ -5,8 +5,11 @@
 #include <fstream>
 #include <iostream>
 #include <algorithm>
-#include <cstdlib>
 #include <cmath>
+#include <cstdlib>
+#include <cerrno>
+#include <climits>
+
 class BitcoinExchange {
 public:
     ~BitcoinExchange(void) {};

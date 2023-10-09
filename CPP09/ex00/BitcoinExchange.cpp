@@ -89,32 +89,19 @@ void BitcoinExchange::ParseData(const std::string& csv) {
 }
 
 static bool IsStrToInt(const std::string& str) {
-	std::string tmp = str;
-	bool positive = true;
-	if (str[0] == '-') {
-		positive = false;
-	}
-	if (positive == false) {
-		tmp = str.substr(1);
-	}
-	if (tmp.length() > 10) {
-		return false;
-	}
+    char *end;
+    errno = 0;
+    long val = std::strtol(str.c_str(), &end, 10);
 
-	if (tmp.find_first_not_of("0123456789") != std::string::npos) {
-		return false;
-	}
+    if (end == str.c_str() || *end != '\0') {
+        return false;
+    }
 
-	if (tmp.length() < 10) {
-		return true;
-	} else if (tmp[0] > '2') {
-		return false;
-	}
-	tmp = tmp.substr(1);
-	if (std::atoi(tmp.c_str()) > 147483647) {
-		return false;
-	}
-	return true;
+    if (errno == ERANGE || val > INT_MAX || val < INT_MIN) {
+        return false;
+    }
+
+    return true;
 }
 
 bool BitcoinExchange::IsValidDate(const std::string& date) const {
