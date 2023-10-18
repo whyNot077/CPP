@@ -45,6 +45,16 @@ void PmergeMe::generateJacobNumbers(void) {
         prev = curr;
         curr = next;
     }
+    int max_size = (n + 1) / 2;
+    jacobNumbers.resize(max_size);
+    for (int i = 0; i < max_size; ++i) {
+        if (jacobNumbers[i] >= max_size) {
+            jacobNumbers[i] = max_size - 1;
+            for (int j = i + 1; j < max_size; ++j) {
+                jacobNumbers[j] = jacobNumbers[j - 1] - 1;
+            }
+        }
+    }
 }
 
 int PmergeMe::findIndex(int value, std::vector<int>::iterator& start, std::vector<int>::iterator& end) {
@@ -53,15 +63,13 @@ int PmergeMe::findIndex(int value, std::vector<int>::iterator& start, std::vecto
 }
 
 // void PmergeMe::sortSecond() {
-//     for (int i = 0; i < jacobNumbers.size(); ++i) {
-//         int index = jacobNumbers[i];
-//         if (index >= sortedVec.size()) {
-//             index = sortedVec.size() - 1;
-//         }
-//         if (pairVec[i].second != NONE) {
-//             int secondIndex = findIndex(
-//             std::swap(sortedVec[index], sortedVec[secondIndex]);
-//         }
+//     int index = 0;
+//     int jacobIndex = 0;
+//     int jacob;
+
+//     while (index < pairVec.size()) {
+//         jacob = jacobNumbers[jacobIndex];
+
 //     }
 // }
 
