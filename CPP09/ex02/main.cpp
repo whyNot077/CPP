@@ -7,6 +7,11 @@ static void PrintString(const std::string& str, int width) {
         std::cout << " ";
     }
 }
+
+static void PrintTime(const double& time) {
+    std::cout << time << " us" << std::endl;
+}
+
 int main(int argc, char** argv) {
     if (argc < 2) {
         std::cout << "Usage: ./PmergeMe [numbers]" << std::endl;
@@ -20,24 +25,34 @@ int main(int argc, char** argv) {
     PrintString("Before:", 10);
     pm.printVec(pm.getVec());
 
+    pm.sortVec();
+    pm.sortList();
+
     // PrintString("Jacob Numbers:");
     // pm.printVec(pm.getJacobNumbers());
 
     // PrintString("Jacob Index:");
     // pm.printVec(pm.getJacobIndex());
 
-    pm.sortVec();
-
-    // PrintString("Pair Vec:");
+    // PrintString("Pair Vec:", 10);
     // pm.printPairVec();
-    
+
+    // PrintString("Pair Lst:", 10);
+    // pm.printPairLst();
+
     PrintString("After:", 10);
     pm.printVec(pm.getSortedVec());
+    // PrintString("After:", 10);
+    // pm.printLst(pm.getSortedLst());
 
     PrintString("Time to process a range of ", 25);
     std::cout << pm.getVec().size();
     PrintString(" elements with std::vector:", 28);
-    std::cout << pm.getSortVecTime() << " us" << std::endl;
-    pm.sortList();
+    PrintTime(pm.getSortVecTime());
+
+    PrintString("Time to process a range of ", 25);
+    std::cout << pm.getLst().size();
+    PrintString(" elements with std::list:", 28);
+    PrintTime(pm.getSortListTime());
     return 0;
 }

@@ -8,26 +8,33 @@ PmergeMe::PmergeMe(const std::string& line) {
 	StrToList(line);
 	LstToVec();
     resizeVec();
+    makePairVec();
+    makePairLst();
     generateJacobNumbers();
 }
 
 void PmergeMe::sortVec(void) {
     std::clock_t start = std::clock();
-    makePairVec();
+    swapPairVec();
     mergeSort(0, pairVec.size() - 1);
     sortSecond();
     std::clock_t end = std::clock();
-    sortVecTime = (end - start) / (double)CLOCKS_PER_SEC * 10;
+    sortVecTime = (end - start) / (double)CLOCKS_PER_SEC * 1000;
 }
+
+void PmergeMe::sortList(void) {
+    std::clock_t start = std::clock();
+    swapPairLst();
+    mergeSort(pairLst.begin(), pairLst.end());
+    sortSecondLst();
+    std::clock_t end = std::clock();
+    sortListTime = (end - start) / (double)CLOCKS_PER_SEC * 1000;
+}
+
 void PmergeMe::resizeVec(void) {
     pairVec.reserve(vec.size() / 2);
     sortedVec.reserve(vec.size());
     jacobIndex.reserve((vec.size() + 1) / 2);
-}
-
-void PmergeMe::sortList(void) {
-    makePairLst();
-    mergeSort(pairLst.begin(), pairLst.end());
 }
 
 void PmergeMe::generateJacobNumbers(void) {
@@ -83,6 +90,52 @@ void PmergeMe::sortSecond() {
     }
 }
 
+int PmergeMe::findIndex(int value, std::list<int>::iterator start, std::list<int>::iterator end) {
+    int index = 0;
+    for (std::list<int>::iterator it = start; it != end; ++it, ++index) {
+        if (*it >= value) {
+            break;
+        }
+    }
+    return index;
+}
+
+void PmergeMe::sortSecondLst(void) {
+    for (std::list<std::pair<long long, long long> >::iterator it = pairLst.begin(); it != pairLst.end(); ++it) {
+        sortedLst.push_back(it->first);
+    }
+
+    // std::cout << "SortedLst: ";
+    // printLst(sortedLst);
+    // std::cout << "______________________" << std::endl;
+
+    std::list<int>::iterator insertPos;
+    for (size_t i = 0; i < jacobIndex.size(); ++i) {
+        int target = jacobIndex[i];
+        std::list<std::pair<long long, long long> >::iterator targetIt = pairLst.begin();
+        std::advance(targetIt, target);
+
+        if (targetIt->second == NONE) {
+            continue;
+        }
+
+        if (i == 0) {
+            insertPos = sortedLst.begin();
+        } else {
+            int index = findIndex(targetIt->second, sortedLst.begin(), sortedLst.end());
+            insertPos = sortedLst.begin();
+            std::advance(insertPos, index);
+            // std::cout << " index: " << index;
+        }
+        sortedLst.insert(insertPos, targetIt->second);
+        // std::cout << " value: " << targetIt->second << std::endl;
+        // std::cout << "SortedLst: ";
+        // printLst(sortedLst);
+        // std::cout << "______________________" << std::endl;
+    }
+}
+
+
 PmergeMe::PmergeMe(PmergeMe const& copy) {
     *this = copy;
 }
@@ -94,21 +147,15 @@ PmergeMe& PmergeMe::operator=(PmergeMe const& copy) {
     }
     return *this;
 }
-
 void PmergeMe::makePairVec(void) {
     int n = vec.size();
     for (int i = 0; i < n; i += 2) {
-        std::pair<int, long long> tmp;
-        if (i + 1 == n) {
-            tmp.first = vec[i];
-            tmp.second = NONE;
-        }
-        else if (vec[i] >= vec[i + 1]) {
-            tmp.first = vec[i];
+        std::pair<long long, long long> tmp;
+        tmp.first = vec[i];
+        if (i + 1 < n) {
             tmp.second = vec[i + 1];
         } else {
-            tmp.first = vec[i + 1];
-            tmp.second = vec[i];
+            tmp.second = NONE;
         }
         pairVec.push_back(tmp);
     }
@@ -116,19 +163,37 @@ void PmergeMe::makePairVec(void) {
 
 void PmergeMe::makePairLst(void) {
     std::list<int>::iterator it = lst.begin();
-    std::list<int>::iterator next_it = std::next(it);
-    while (next_it != lst.end()) {
-        std::pair<int, long long> tmp;
-        if (*it >= *next_it) {
-            tmp.first = *it;
-            tmp.second = *next_it;
-        } else {
-            tmp.first = *next_it;
+    while (it != lst.end()) {
+        std::pair<long long, long long> tmp;
+        tmp.first = *it;
+        ++it;
+        if (it != lst.end()) {
             tmp.second = *it;
+            ++it;
+        } else {
+            tmp.second = NONE;
         }
         pairLst.push_back(tmp);
-        ++it;
-        ++next_it;
+    }
+}
+
+void PmergeMe::swapPairVec() {
+    for (size_t i = 0; i < pairVec.size(); ++i) {
+        if (pairVec[i].second != NONE) {
+            if (pairVec[i].first > pairVec[i].second) {
+                std::swap(pairVec[i].first, pairVec[i].second);
+            }
+        }
+    }
+}
+
+void PmergeMe::swapPairLst() {
+    for (std::list<std::pair<long long, long long> >::iterator it = pairLst.begin(); it != pairLst.end(); ++it) {
+        if (it->second != NONE) {
+            if (it->first > it->second) {
+                std::swap(it->first, it->second);
+            }
+        }
     }
 }
 
@@ -176,10 +241,24 @@ void PmergeMe::merge(int left, int mid, int right) {
     }
 }
 
-void PmergeMe::merge(std::list<std::pair<int, long long> >::iterator left, 
-           std::list<std::pair<int, long long> >::iterator mid, std::list<std::pair<int, long long> >::iterator right) {
-    std::list<std::pair<int, long long> > temp;
-    std::list<std::pair<int, long long> >::iterator i = left, j = mid, k;
+void PmergeMe::mergeSort(std::list<std::pair<long long, long long> >::iterator left, 
+               std::list<std::pair<long long, long long> >::iterator right) {
+    if (left != right && std::next(left) != right) {
+        std::list<std::pair<long long, long long> >::iterator mid = left;
+        std::advance(mid, std::distance(left, right) / 2);
+
+        mergeSort(left, mid);
+        mergeSort(mid, right);
+
+        merge(left, mid, right);
+    }
+}
+
+
+void PmergeMe::merge(std::list<std::pair<long long, long long> >::iterator left, 
+           std::list<std::pair<long long, long long> >::iterator mid, std::list<std::pair<long long, long long> >::iterator right) {
+    std::list<std::pair<long long, long long> > temp;
+    std::list<std::pair<long long, long long> >::iterator i = left, j = mid, k;
 
     while (i != mid && j != right) {
         if ((*i).first <= (*j).first) {
@@ -202,21 +281,8 @@ void PmergeMe::merge(std::list<std::pair<int, long long> >::iterator left,
     }
 
     k = left;
-    for (std::list<std::pair<int, long long> >::iterator it = temp.begin(); it != temp.end(); ++it, ++k) {
+    for (std::list<std::pair<long long, long long> >::iterator it = temp.begin(); it != temp.end(); ++it, ++k) {
         *k = *it;
-    }
-}
-
-void PmergeMe::mergeSort(std::list<std::pair<int, long long> >::iterator left, 
-               std::list<std::pair<int, long long> >::iterator right) {
-    if (left != right && std::next(left) != right) {
-        std::list<std::pair<int, long long> >::iterator mid = left;
-        std::advance(mid, std::distance(left, right) / 2);
-
-        mergeSort(left, mid);
-        mergeSort(mid, right);
-
-        merge(left, mid, right);
     }
 }
 
@@ -285,4 +351,30 @@ const std::vector<int>& PmergeMe::getJacobIndex(void) {
 
 const double& PmergeMe::getSortVecTime(void) {
     return sortVecTime;
+}
+
+void PmergeMe::printLst(const std::list<int>& lst) {
+    for (std::list<int>::const_iterator it = lst.begin(); it != lst.end(); ++it) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+}
+
+void PmergeMe::printPairLst(void) {
+    for (std::list<std::pair<long long, long long> >::iterator it = pairLst.begin(); it != pairLst.end(); ++it) {
+        std::cout << (*it).first << " " << (*it).second << " ";
+    }
+    std::cout << std::endl;
+}
+
+const std::list<int>& PmergeMe::getLst(void) {
+    return lst;
+}
+
+const std::list<int>& PmergeMe::getSortedLst(void) {
+    return sortedLst;
+}
+
+const double& PmergeMe::getSortListTime(void) {
+    return sortListTime;
 }
