@@ -8,6 +8,7 @@
 #include <iterator>
 #include <utility> 
 #include <sstream>
+#include <ctime>
 class PmergeMe {
 public:
     PmergeMe(const std::string& line);
@@ -19,6 +20,7 @@ public:
     const std::vector<int>& getVec(void);
     const std::vector<int>& getSortedVec(void);
     const std::vector<int>& getJacobIndex(void);
+    const double& getSortVecTime(void);
 private:
     long long NONE;
 	std::vector<int> vec;
@@ -28,6 +30,8 @@ private:
     std::list<std::pair<int, long long> > pairLst;
     std::list<int> sortedLst;
     std::vector<int> jacobIndex;
+    double sortVecTime;
+    // double sortListTime;
 private:
     PmergeMe(void) {};
     PmergeMe(PmergeMe const& copy);

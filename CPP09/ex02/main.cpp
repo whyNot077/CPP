@@ -1,7 +1,6 @@
 #include "PmergeMe.hpp"
 
-static void PrintString(const std::string& str) {
-    const int width = 15;
+static void PrintString(const std::string& str, int width) {
     int len = width - str.length();
     std::cout << str;
     for (int i = 0; i < len; ++i) {
@@ -18,7 +17,7 @@ int main(int argc, char** argv) {
         ss << argv[i] << " ";
     }
     PmergeMe pm(ss.str());
-    PrintString("Before:");
+    PrintString("Before:", 10);
     pm.printVec(pm.getVec());
 
     // PrintString("Jacob Numbers:");
@@ -32,8 +31,13 @@ int main(int argc, char** argv) {
     // PrintString("Pair Vec:");
     // pm.printPairVec();
     
-    PrintString("After:");
+    PrintString("After:", 10);
     pm.printVec(pm.getSortedVec());
+
+    PrintString("Time to process a range of ", 25);
+    std::cout << pm.getVec().size();
+    PrintString(" elements with std::vector:", 28);
+    std::cout << pm.getSortVecTime() << " us" << std::endl;
     pm.sortList();
     return 0;
 }

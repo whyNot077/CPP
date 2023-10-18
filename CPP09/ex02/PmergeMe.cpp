@@ -12,9 +12,12 @@ PmergeMe::PmergeMe(const std::string& line) {
 }
 
 void PmergeMe::sortVec(void) {
+    std::clock_t start = std::clock();
     makePairVec();
     mergeSort(0, pairVec.size() - 1);
     sortSecond();
+    std::clock_t end = std::clock();
+    sortVecTime = (end - start) / (double)CLOCKS_PER_SEC * 10;
 }
 void PmergeMe::resizeVec(void) {
     pairVec.reserve(vec.size() / 2);
@@ -278,4 +281,8 @@ void PmergeMe::printPairVec(void) {
 
 const std::vector<int>& PmergeMe::getJacobIndex(void) {
     return jacobIndex;
+}
+
+const double& PmergeMe::getSortVecTime(void) {
+    return sortVecTime;
 }
