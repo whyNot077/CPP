@@ -19,7 +19,6 @@ void PmergeMe::sortVec(void) {
 void PmergeMe::resizeVec(void) {
     pairVec.reserve(vec.size() / 2);
     sortedVec.reserve(vec.size());
-    jacobNumbers.reserve(vec.size());
     jacobIndex.reserve((vec.size() + 1) / 2);
 }
 
@@ -33,14 +32,11 @@ void PmergeMe::generateJacobNumbers(void) {
     int curr = 1;
     int n = vec.size();
     
-    jacobNumbers.push_back(prev);
-    jacobNumbers.push_back(curr);
     jacobIndex.push_back(prev);
     jacobIndex.push_back(curr);
     int max_size = (n + 1) / 2;
     for (int i = 2; i < n; ++i) {
         int next = curr + 2 * prev;
-        jacobNumbers.push_back(next);
         int size = next;
         if (size >= max_size) {
             size = max_size - 1;
@@ -268,10 +264,6 @@ const std::vector<int>& PmergeMe::getVec(void) {
 
 const std::vector<int>& PmergeMe::getSortedVec(void) {
     return sortedVec;
-}
-
-const std::vector<int>& PmergeMe::getJacobNumbers(void) {
-    return jacobNumbers;
 }
 
 void PmergeMe::printPairVec(void) {

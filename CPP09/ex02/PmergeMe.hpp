@@ -19,7 +19,6 @@ public:
     void printPairVec(void);
     const std::vector<int>& getVec(void);
     const std::vector<int>& getSortedVec(void);
-    const std::vector<int>& getJacobNumbers(void);
     const std::vector<int>& getJacobIndex(void);
 private:
 	std::vector<int> vec;
@@ -28,7 +27,6 @@ private:
 	std::list<int> lst;
     std::list<std::pair<int, long long> > pairLst;
     std::list<int> sortedLst;
-    std::vector<int> jacobNumbers;
     std::vector<int> jacobIndex;
 private:
     PmergeMe(void) {};
