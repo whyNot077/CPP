@@ -9,7 +9,6 @@
 #include <utility> 
 #include <sstream>
 class PmergeMe {
-    long long NONE;
 public:
     PmergeMe(const std::string& line);
     ~PmergeMe(void) {};
@@ -21,6 +20,7 @@ public:
     const std::vector<int>& getSortedVec(void);
     const std::vector<int>& getJacobIndex(void);
 private:
+    long long NONE;
 	std::vector<int> vec;
     std::vector<std::pair<int, long long> > pairVec;
     std::vector<int> sortedVec;

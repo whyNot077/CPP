@@ -64,10 +64,13 @@ void PmergeMe::sortSecond() {
     for (size_t i = 0; i < jacobIndex.size(); ++i) {
         int target = jacobIndex[i];
         int index;
+        if (pairVec[target].second == NONE) {
+            continue;
+        }
         if (i == 0) {
             index = 0;
         } else {
-            index = findIndex(pairVec[target].second, sortedVec.begin(), sortedVec.begin() + target * 2 - 1);
+            index = findIndex(pairVec[target].second, sortedVec.begin(), sortedVec.begin() + target * 2);
         }
         sortedVec.insert(sortedVec.begin() + index, pairVec[target].second);
         // std::cout << " index: " << index << " value: " << pairVec[target].second << std::endl;
