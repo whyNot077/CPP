@@ -22,6 +22,7 @@ public:
     const std::vector<int>& getVec(void);
     const std::vector<int>& getSortedVec(void);
     const std::list<int>& getSortedLst(void);
+    const std::vector<int>& getJacobNumbers(void);
     const std::vector<int>& getJacobIndex(void);
     const std::list<int>& getLst(void);
     const double& getSortVecTime(void);
@@ -34,6 +35,7 @@ private:
 	std::list<int> lst;
     std::list<std::pair<long long, long long> > pairLst;
     std::list<int> sortedLst;
+    std::vector<int> jacobNumbers;
     std::vector<int> jacobIndex;
     double sortVecTime;
     double sortListTime;
