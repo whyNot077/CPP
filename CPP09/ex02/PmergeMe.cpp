@@ -14,12 +14,13 @@ PmergeMe::PmergeMe(const std::string& line) {
 void PmergeMe::sortVec(void) {
     makePairVec();
     mergeSort(0, pairVec.size() - 1);
-    // sortSecond();
+    sortSecond();
 }
 void PmergeMe::resizeVec(void) {
     pairVec.reserve(vec.size() / 2);
-    sortedVec.resize(vec.size(), 0);
+    sortedVec.reserve(vec.size());
     jacobNumbers.reserve(vec.size());
+    jacobIndex.reserve((vec.size() + 1) / 2);
 }
 
 void PmergeMe::sortList(void) {
@@ -34,44 +35,51 @@ void PmergeMe::generateJacobNumbers(void) {
     
     jacobNumbers.push_back(prev);
     jacobNumbers.push_back(curr);
+    jacobIndex.push_back(prev);
+    jacobIndex.push_back(curr);
+    int max_size = (n + 1) / 2;
     for (int i = 2; i < n; ++i) {
         int next = curr + 2 * prev;
-        if (next >= n) {
-            next = n - 1;
+        jacobNumbers.push_back(next);
+        int size = next;
+        if (size >= max_size) {
+            size = max_size - 1;
         }
-        for (int j = 0; j < next - curr; ++j) {
-            jacobNumbers.push_back(next - j);
+        for (int j = 0; j < size - curr; ++j) {
+            jacobIndex.push_back(size - j);
         }
         prev = curr;
         curr = next;
     }
-    int max_size = (n + 1) / 2;
-    jacobNumbers.resize(max_size);
-    for (int i = 0; i < max_size; ++i) {
-        if (jacobNumbers[i] >= max_size) {
-            jacobNumbers[i] = max_size - 1;
-            for (int j = i + 1; j < max_size; ++j) {
-                jacobNumbers[j] = jacobNumbers[j - 1] - 1;
-            }
+}
+
+int PmergeMe::findIndex(int value, std::vector<int>::iterator start, std::vector<int>::iterator end) {
+    std::vector<int>::iterator it = std::lower_bound(start, end, value);
+    return std::distance(start, it);
+}
+
+void PmergeMe::sortSecond() {
+    for (size_t i = 0; i < pairVec.size(); ++i) {
+        sortedVec.push_back(pairVec[i].first);
+    }
+    // std::cout << "SortedVec: ";
+    // printVec(sortedVec);
+    // std::cout << "______________________" << std::endl;
+    for (size_t i = 0; i < jacobIndex.size(); ++i) {
+        int target = jacobIndex[i];
+        int index;
+        if (i == 0) {
+            index = 0;
+        } else {
+            index = findIndex(pairVec[target].second, sortedVec.begin(), sortedVec.begin() + target * 2 - 1);
         }
+        sortedVec.insert(sortedVec.begin() + index, pairVec[target].second);
+        // std::cout << " index: " << index << " value: " << pairVec[target].second << std::endl;
+        // std::cout << "SortedVec: ";
+        // printVec(sortedVec);
+        // std::cout << "______________________" << std::endl;
     }
 }
-
-int PmergeMe::findIndex(int value, std::vector<int>::iterator& start, std::vector<int>::iterator& end) {
-    std::vector<int>::iterator it = std::lower_bound(start, end, value);
-    return it - sortedVec.begin();
-}
-
-// void PmergeMe::sortSecond() {
-//     int index = 0;
-//     int jacobIndex = 0;
-//     int jacob;
-
-//     while (index < pairVec.size()) {
-//         jacob = jacobNumbers[jacobIndex];
-
-//     }
-// }
 
 PmergeMe::PmergeMe(PmergeMe const& copy) {
     *this = copy;
@@ -161,15 +169,8 @@ void PmergeMe::merge(int left, int mid, int right) {
         k++;
     }
 
-    int index = 0;
     for (i = left, k = 0; i <= right; ++i, ++k) {
         pairVec[i] = temp[k];
-        sortedVec[index] = temp[k].first;
-        index++;
-        if (temp[k].second != NONE) {
-            sortedVec[index] = temp[k].second;
-            index++;
-        }
     }
 }
 
@@ -278,4 +279,8 @@ void PmergeMe::printPairVec(void) {
         std::cout << pairVec[i].first << " " << pairVec[i].second<< " ";
     }
     std::cout << std::endl;
+}
+
+const std::vector<int>& PmergeMe::getJacobIndex(void) {
+    return jacobIndex;
 }

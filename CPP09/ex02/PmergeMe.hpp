@@ -20,6 +20,7 @@ public:
     const std::vector<int>& getVec(void);
     const std::vector<int>& getSortedVec(void);
     const std::vector<int>& getJacobNumbers(void);
+    const std::vector<int>& getJacobIndex(void);
 private:
 	std::vector<int> vec;
     std::vector<std::pair<int, long long> > pairVec;
@@ -28,6 +29,7 @@ private:
     std::list<std::pair<int, long long> > pairLst;
     std::list<int> sortedLst;
     std::vector<int> jacobNumbers;
+    std::vector<int> jacobIndex;
 private:
     PmergeMe(void) {};
     PmergeMe(PmergeMe const& copy);
@@ -43,7 +45,7 @@ private:
     void merge(std::list<std::pair<int, long long> >::iterator left, 
            std::list<std::pair<int, long long> >::iterator mid, std::list<std::pair<int, long long> >::iterator right);
     void generateJacobNumbers(void);
-    int findIndex(int value, std::vector<int>::iterator& start, std::vector<int>::iterator& end);
+    int findIndex(int value, std::vector<int>::iterator start, std::vector<int>::iterator end);
     void sortSecond();
     void resizeVec(void);
 };

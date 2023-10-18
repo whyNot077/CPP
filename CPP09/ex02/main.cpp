@@ -21,12 +21,16 @@ int main(int argc, char** argv) {
     PrintString("Before:");
     pm.printVec(pm.getVec());
 
-    PrintString("Jacob Numbers:");
-    pm.printVec(pm.getJacobNumbers());
+    // PrintString("Jacob Numbers:");
+    // pm.printVec(pm.getJacobNumbers());
+
+    // PrintString("Jacob Index:");
+    // pm.printVec(pm.getJacobIndex());
 
     pm.sortVec();
-    PrintString("Pair Vec:");
-    pm.printPairVec();
+
+    // PrintString("Pair Vec:");
+    // pm.printPairVec();
     
     PrintString("After:");
     pm.printVec(pm.getSortedVec());
