@@ -22,7 +22,6 @@ public:
     const std::vector<int>& getVec(void);
     const std::vector<int>& getSortedVec(void);
     const std::list<int>& getSortedLst(void);
-    const std::vector<int>& getJacobNumbers(void);
     const std::vector<int>& getJacobIndex(void);
     const std::list<int>& getLst(void);
     const double& getSortVecTime(void);

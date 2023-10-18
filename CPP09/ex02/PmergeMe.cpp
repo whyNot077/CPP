@@ -42,15 +42,12 @@ void PmergeMe::generateJacobNumbers(void) {
     int curr = 1;
     int n = vec.size();
     
-    jacobNumbers.push_back(prev);
-    jacobNumbers.push_back(curr);
     jacobIndex.push_back(prev);
     jacobIndex.push_back(curr);
     int max_size = (n + 1) / 2;
     for (int i = 2; i < n; ++i) {
         int next = curr + 2 * prev;
         int size = next;
-        jacobNumbers.push_back(size);
         if (size >= max_size) {
             size = max_size - 1;
         }
@@ -141,7 +138,7 @@ void PmergeMe::sortSecondLst(void) {
         std::advance(insertPos, index + prevJacob);
         
         sortedLst.insert(insertPos, targetIt->second);
-        
+
         // std::cout << " target: " << target << " prevJacob: " << prevJacob << " lastJacob: " << lastJacob << std::endl;
         // std::cout << "index: " << index << " value: " << targetIt->second << std::endl;
         // std::cout << "SortedLst: ";
@@ -392,8 +389,4 @@ const std::list<int>& PmergeMe::getSortedLst(void) {
 
 const double& PmergeMe::getSortListTime(void) {
     return sortListTime;
-}
-
-const std::vector<int>& PmergeMe::getJacobNumbers(void) {
-    return jacobNumbers;
 }
