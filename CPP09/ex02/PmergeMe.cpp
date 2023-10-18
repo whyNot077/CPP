@@ -328,6 +328,21 @@ void PmergeMe::merge(std::list<std::pair<long long, long long> >::iterator left,
     }
 }
 
+
+static bool IsStrToInt(const std::string& str) {
+    char *end;
+    errno = 0;
+    long val = std::strtol(str.c_str(), &end, 10);
+
+    if (end == str.c_str() || *end != '\0') {
+        return false;
+    }
+    if (errno == ERANGE || val > INT_MAX || val < INT_MIN) {
+        return false;
+    }
+    return true;
+}
+
 void PmergeMe::StrToList(const std::string& line) {
 	std::stringstream ss(line);
 	std::string tmp;
@@ -356,20 +371,6 @@ void PmergeMe::printVec(const std::vector<int>& vec) {
         std::cout << vec[i] << " ";
     }
     std::cout << std::endl;
-}
-
-static bool IsStrToInt(const std::string& str) {
-    char *end;
-    errno = 0;
-    long val = std::strtol(str.c_str(), &end, 10);
-
-    if (end == str.c_str() || *end != '\0') {
-        return false;
-    }
-    if (errno == ERANGE || val > INT_MAX || val < INT_MIN) {
-        return false;
-    }
-    return true;
 }
 
 const std::vector<int>& PmergeMe::getVec(void) {

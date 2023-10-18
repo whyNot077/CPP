@@ -17,6 +17,7 @@ int main(int argc, char** argv) {
         std::cout << "Usage: ./PmergeMe [numbers]" << std::endl;
         return 1;
     }
+
     std::stringstream ss;
     for (int i = 1; i < argc; ++i) {
         ss << argv[i] << " ";
@@ -39,8 +40,8 @@ int main(int argc, char** argv) {
 
     PrintString("After:", 10);
     pm.printVec(pm.getSortedVec());
-    PrintString("After:", 10);
-    pm.printLst(pm.getSortedLst());
+    // PrintString("After:", 10);
+    // pm.printLst(pm.getSortedLst());
 
     PrintString("Time to process a range of ", 25);
     std::cout << pm.getVec().size();
