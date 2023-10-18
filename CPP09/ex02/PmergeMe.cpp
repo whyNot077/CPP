@@ -68,6 +68,20 @@ int PmergeMe::findIndex(int value, std::vector<int>::iterator start, std::vector
 }
 
 void PmergeMe::sortSecond() {
+    if (pairVec.size() == 1) {
+        if (pairVec[0].second == NONE) {
+            sortedVec.push_back(pairVec[0].first);
+        } else if (pairVec[0].first == NONE) {
+            sortedVec.push_back(pairVec[0].second);
+        } else if (pairVec[0].first <= pairVec[0].second) {
+            sortedVec.push_back(pairVec[0].first);
+            sortedVec.push_back(pairVec[0].second);
+        } else {
+            sortedVec.push_back(pairVec[0].second);
+            sortedVec.push_back(pairVec[0].first);
+        }
+        return;
+    }
     for (size_t i = 0; i < pairVec.size(); ++i) {
         sortedVec.push_back(pairVec[i].first);
     }
@@ -107,6 +121,22 @@ int PmergeMe::findIndex(int value, std::list<int>::iterator start, std::list<int
 }
 
 void PmergeMe::sortSecondLst(void) {
+    if (pairLst.size() == 1) {
+        std::list<std::pair<long long, long long> >::iterator it = pairLst.begin();
+        if (it->second == NONE) {
+            sortedLst.push_back(it->first);
+        } else if (it->first == NONE) {
+            sortedLst.push_back(it->second);
+        } else if (it->first <= it->second) {
+            sortedLst.push_back(it->first);
+            sortedLst.push_back(it->second);
+        } else {
+            sortedLst.push_back(it->second);
+            sortedLst.push_back(it->first);
+        }
+        return;
+    }
+    
     for (std::list<std::pair<long long, long long> >::iterator it = pairLst.begin(); it != pairLst.end(); ++it) {
         sortedLst.push_back(it->first);
     }
