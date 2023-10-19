@@ -221,7 +221,7 @@ void PmergeMe::makePairLst(void) {
 void PmergeMe::swapPairVec() {
     for (size_t i = 0; i < pairVec.size(); ++i) {
         if (pairVec[i].second != NONE) {
-            if (pairVec[i].first > pairVec[i].second) {
+            if (pairVec[i].first < pairVec[i].second) {
                 std::swap(pairVec[i].first, pairVec[i].second);
             }
         }
@@ -231,7 +231,7 @@ void PmergeMe::swapPairVec() {
 void PmergeMe::swapPairLst() {
     for (std::list<std::pair<long long, long long> >::iterator it = pairLst.begin(); it != pairLst.end(); ++it) {
         if (it->second != NONE) {
-            if (it->first > it->second) {
+            if (it->first < it->second) {
                 std::swap(it->first, it->second);
             }
         }
