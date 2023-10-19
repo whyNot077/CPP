@@ -1,8 +1,6 @@
 #include "PmergeMe.hpp"
 #define MAX_NUM 100000
 
-static bool IsStrToInt(const std::string& str);
-
 PmergeMe::PmergeMe(const std::string& line) {
     NONE = -2147483650;
 	StrToList(line);
@@ -19,7 +17,8 @@ void PmergeMe::sortVec(void) {
     mergeSort(0, pairVec.size() - 1);
     sortSecond();
     std::clock_t end = std::clock();
-    sortVecTime = (end - start) / (double)CLOCKS_PER_SEC * 1000;
+    sortVecTime = (end - start) / static_cast<double>(CLOCKS_PER_SEC) * 1e6;
+
 }
 
 void PmergeMe::sortList(void) {
@@ -28,7 +27,7 @@ void PmergeMe::sortList(void) {
     mergeSort(pairLst.begin(), pairLst.end());
     sortSecondLst();
     std::clock_t end = std::clock();
-    sortListTime = (end - start) / (double)CLOCKS_PER_SEC * 1000;
+    sortListTime = (end - start) / static_cast<double>(CLOCKS_PER_SEC) * 1e6;
 }
 
 void PmergeMe::resizeVec(void) {
@@ -328,33 +327,14 @@ void PmergeMe::merge(std::list<std::pair<long long, long long> >::iterator left,
     }
 }
 
-
-static bool IsStrToInt(const std::string& str) {
-    char *end;
-    errno = 0;
-    long val = std::strtol(str.c_str(), &end, 10);
-
-    if (end == str.c_str() || *end != '\0') {
-        return false;
-    }
-    if (errno == ERANGE || val > INT_MAX || val < INT_MIN) {
-        return false;
-    }
-    return true;
-}
-
 void PmergeMe::StrToList(const std::string& line) {
-	std::stringstream ss(line);
-	std::string tmp;
+    std::stringstream ss(line);
+    std::string tmp;
 
-	while (std::getline(ss, tmp, ' ')) {
-		if (!IsStrToInt(tmp)) {
-			std::cout << "Error" << std::endl;
-			exit(1);
-		}
-		int num = std::atoi(tmp.c_str());
-		lst.push_back(num);
-	}
+    while (std::getline(ss, tmp, ' ')) {
+        int num = std::atoi(tmp.c_str());
+        lst.push_back(num);
+    }
 }
 
 void PmergeMe::LstToVec(void) {

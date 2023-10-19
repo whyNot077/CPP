@@ -1,5 +1,19 @@
 #include "PmergeMe.hpp"
 
+static bool IsStrToInt(const std::string& str) {
+    char *end;
+    errno = 0;
+    long val = std::strtol(str.c_str(), &end, 10);
+
+    if (end == str.c_str() || *end != '\0') {
+        return false;
+    }
+    if (errno == ERANGE || val < 0) {
+        return false;
+    }
+    return true;
+}
+
 static void PrintString(const std::string& str, int width) {
     int len = width - str.length();
     std::cout << str;
@@ -20,7 +34,11 @@ int main(int argc, char** argv) {
 
     std::stringstream ss;
     for (int i = 1; i < argc; ++i) {
-        ss << argv[i] << " ";
+        if (!IsStrToInt(argv[i])) {
+            std::cout << "Error" << std::endl;
+            return 1;
+        }
+        ss << argv[i] << ' ';
     }
     PmergeMe pm(ss.str());
     PrintString("Before:", 10);
