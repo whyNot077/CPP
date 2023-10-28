@@ -37,7 +37,7 @@ RPN::RPN(const std::string& line) {
     }
     double result = 0.0;
 
-    std::stack<int> tmp;
+    std::stack<double> tmp;
 
     while (!computer.empty()) {
         while (!computer.empty() && computer.top().is_num) {
@@ -54,9 +54,9 @@ RPN::RPN(const std::string& line) {
             std::cout << "Error" << std::endl;
             return;
         }
-        int num2 = tmp.top();
+        double num2 = tmp.top();
         tmp.pop();
-        int num1 = tmp.top();
+        double num1 = tmp.top();
         tmp.pop();
         result = Calculate(num1, num2, op);
         tmp.push(result);
