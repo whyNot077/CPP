@@ -47,6 +47,7 @@ BitcoinExchange::BitcoinExchange(std::string filename) : csv(csvData), filename(
         std::string::size_type pos = line.find('|');
         if (pos == std::string::npos) {
             std::cout << "Error: bad input => " << line << std::endl;
+            line.clear();
             continue;
         }
         date = line.substr(0, pos - 1);

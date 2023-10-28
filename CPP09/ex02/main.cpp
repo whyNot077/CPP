@@ -50,16 +50,16 @@ int main(int argc, char** argv) {
     // PrintString("Jacob Index:", 15);
     // pm.printVec(pm.getJacobIndex());
 
-    // PrintString("Pair Vec:", 10);
-    // pm.printPairVec();
+    PrintString("Pair Vec:", 10);
+    pm.printPairVec();
 
-    // PrintString("Pair Lst:", 10);
-    // pm.printPairLst();
+    PrintString("Pair Lst:", 10);
+    pm.printPairLst();
 
     PrintString("After:", 10);
     pm.printVec(pm.getSortedVec());
-    // PrintString("After:", 10);
-    // pm.printLst(pm.getSortedLst());
+    PrintString("After:", 10);
+    pm.printLst(pm.getSortedLst());
 
     PrintString("Time to process a range of ", 25);
     std::cout << pm.getVec().size();
