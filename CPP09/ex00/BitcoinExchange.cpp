@@ -115,14 +115,15 @@ bool BitcoinExchange::IsValidDate(const std::string& date) const {
         return false;
     }
 
-	std::string s_year = date.substr(0, 4);
-	std::string s_month = date.substr(5, 2);
-	std::string s_day = date.substr(8, 2);
+    std::string s_year = date.substr(0, 4);
+    std::string s_month = date.substr(5, 2);
+    std::string s_day = date.substr(8, 2);
 
-	if (!IsStrToInt(s_year) || !IsStrToInt(s_month) || !IsStrToInt(s_day)) {
-		std::cout << "Error: bad input => " << date << std::endl;
-		return false;
-	}
+    if (!IsStrToInt(s_year) || !IsStrToInt(s_month) || !IsStrToInt(s_day)) {
+        std::cout << "Error: bad input => " << date << std::endl;
+        return false;
+    }
+
     int year = std::atoi(s_year.c_str());
     int month = std::atoi(s_month.c_str());
     int day = std::atoi(s_day.c_str());
@@ -131,6 +132,8 @@ bool BitcoinExchange::IsValidDate(const std::string& date) const {
         std::cout << "Error: bad input => " << date << std::endl;
         return false;
     }
+    bool is_leap_year = ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0);
+
     switch (month) {
         case 1: case 3: case 5: case 7: case 8: case 10: case 12:
             if (day < 1 || day > 31) {
@@ -145,9 +148,16 @@ bool BitcoinExchange::IsValidDate(const std::string& date) const {
             }
             break;
         case 2:
-            if (day < 1 || day > 28) {
-                std::cout << "Error: bad input => " << date << std::endl;
-                return false;
+            if (is_leap_year) {
+                if (day < 1 || day > 29) {
+                    std::cout << "Error: bad input => " << date << std::endl;
+                    return false;
+                }
+            } else {
+                if (day < 1 || day > 28) {
+                    std::cout << "Error: bad input => " << date << std::endl;
+                    return false;
+                }
             }
             break;
         default:
@@ -156,7 +166,6 @@ bool BitcoinExchange::IsValidDate(const std::string& date) const {
     }
     return true;
 }
-
 static std::string GetPreviousDate(std::string& date) {
     std::string year = date.substr(0, 4);
     std::string month = date.substr(5, 2);
@@ -165,7 +174,8 @@ static std::string GetPreviousDate(std::string& date) {
         if (month == "01") {
             year = std::to_string(std::stoi(year) - 1);
             month = "12";
-        } else {
+        } 
+else {
             month = std::to_string(std::stoi(month) - 1);
             if (month.size() == 1)
                 month = "0" + month;
