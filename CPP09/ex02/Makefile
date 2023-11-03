@@ -36,6 +36,9 @@ re:
 debug: fclean
 	make DEBUG=1 -j
 
+test: all
+	./PmergeMe `jot -r 20 1 100000 | tr '\n' ' '`
+
 .PHONY: all clean fclean re debug
 
 -include $(wildcard *.d)

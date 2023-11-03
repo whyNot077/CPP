@@ -55,8 +55,6 @@ private:
     void merge(std::list<std::pair<long long, long long> >::iterator left, 
            std::list<std::pair<long long, long long> >::iterator mid, std::list<std::pair<long long, long long> >::iterator right);
     void generateJacobNumbers(void);
-    int findIndex(int value, std::vector<int>::iterator start, std::vector<int>::iterator end);
-    int findIndex(int value, std::list<int>::iterator start, std::list<int>::iterator end);
     void sortSecond();
     void resizeVec(void);
     void sortSecondLst(void);

@@ -61,7 +61,7 @@ void PmergeMe::generateJacobNumbers(void) {
     }
 }
 
-int PmergeMe::findIndex(int value, std::vector<int>::iterator start, std::vector<int>::iterator end) {
+int findIndex(int value, std::vector<int>::iterator start, std::vector<int>::iterator end) {
     std::vector<int>::iterator it = std::lower_bound(start, end, value);
     return std::distance(start, it);
 }
@@ -70,11 +70,6 @@ void PmergeMe::sortSecond() {
     if (pairVec.size() == 1) {
         if (pairVec[0].second == NONE) {
             sortedVec.push_back(pairVec[0].first);
-        } else if (pairVec[0].first == NONE) {
-            sortedVec.push_back(pairVec[0].second);
-        } else if (pairVec[0].first <= pairVec[0].second) {
-            sortedVec.push_back(pairVec[0].first);
-            sortedVec.push_back(pairVec[0].second);
         } else {
             sortedVec.push_back(pairVec[0].second);
             sortedVec.push_back(pairVec[0].first);
@@ -87,95 +82,65 @@ void PmergeMe::sortSecond() {
     // std::cout << "SortedVec: ";
     // printVec(sortedVec);
     // std::cout << "______________________" << std::endl;
-    int prevJacob = jacobIndex[0];
-    int lastJacob = jacobIndex[1];
     for (size_t i = 0; i < jacobIndex.size(); ++i) {
         int target = jacobIndex[i];
-        int index;
-        if (target > lastJacob) {
-            prevJacob = lastJacob;
-            lastJacob = target;
-        }
         if (pairVec[target].second == NONE) {
             continue;
         }
-        index = findIndex(pairVec[target].second, sortedVec.begin() + prevJacob, sortedVec.end());
-        sortedVec.insert(sortedVec.begin() + index + prevJacob, pairVec[target].second);
-        // std::cout << "prevJacob: " << prevJacob << " lastJacob: " << lastJacob << std::endl;
-        // std::cout << " index: " << index << " value: " << pairVec[target].second << std::endl;
+        int move = std::min((target + 2) * 2, static_cast<int>(sortedVec.size()));
+        int index = findIndex(pairVec[target].second, sortedVec.begin(),  sortedVec.begin() + move);
+        sortedVec.insert(sortedVec.begin() + index, pairVec[target].second);
+        // std::cout << "begin index: " << 0 << " end index: " << move << " value: " << pairVec[target].second << " index: " << index << std::endl;
         // std::cout << "SortedVec: ";
         // printVec(sortedVec);
         // std::cout << "______________________" << std::endl;
+        // ./PmergeMe `jot -r 30 1 100000 | tr '\n' ' '`
     }
 }
 
-int PmergeMe::findIndex(int value, std::list<int>::iterator start, std::list<int>::iterator end) {
-    int index = 0;
-    for (std::list<int>::iterator it = start; it != end; ++it, ++index) {
+std::list<int>::iterator findIndexList(long long value, std::list<int>::iterator start, std::list<int>::iterator end) {
+    for (std::list<int>::iterator it = start; it != end; ++it) {
         if (*it >= value) {
-            break;
+            return it;
         }
     }
-    return index;
+    return end;
 }
 
-void PmergeMe::sortSecondLst(void) {
+void PmergeMe::sortSecondLst() {
     if (pairLst.size() == 1) {
         std::list<std::pair<long long, long long> >::iterator it = pairLst.begin();
         if (it->second == NONE) {
             sortedLst.push_back(it->first);
-        } else if (it->first == NONE) {
-            sortedLst.push_back(it->second);
-        } else if (it->first <= it->second) {
-            sortedLst.push_back(it->first);
-            sortedLst.push_back(it->second);
         } else {
             sortedLst.push_back(it->second);
             sortedLst.push_back(it->first);
         }
         return;
     }
-    
     for (std::list<std::pair<long long, long long> >::iterator it = pairLst.begin(); it != pairLst.end(); ++it) {
         sortedLst.push_back(it->first);
     }
-
-    // std::cout << "SortedLst: ";
-    // printLst(sortedLst);
-    // std::cout << "______________________" << std::endl;
-
-    int prevJacob = jacobIndex[0];
-    int lastJacob = jacobIndex[1];
-    std::list<int>::iterator insertPos;
-    for (size_t i = 0; i < jacobIndex.size(); ++i) {
+    for (std::vector<int>::size_type i = 0; i < jacobIndex.size(); ++i) {
         int target = jacobIndex[i];
-        if (target > lastJacob) {
-            prevJacob = lastJacob;
-            lastJacob = target;
-        }
         std::list<std::pair<long long, long long> >::iterator targetIt = pairLst.begin();
         std::advance(targetIt, target);
-
         if (targetIt->second == NONE) {
             continue;
         }
-        std::list<int>::iterator prevJacobIt = sortedLst.begin();
-        std::advance(prevJacobIt, prevJacob);
-        
-        int index = findIndex(targetIt->second, prevJacobIt, sortedLst.end());
-        insertPos = sortedLst.begin();
-        std::advance(insertPos, index + prevJacob);
-        
+        int move = std::min((target + 2) * 2, static_cast<int>(sortedLst.size()));
+        std::list<int>::iterator moveIt = sortedLst.begin();
+        std::advance(moveIt, move);
+        std::list<int>::iterator insertPos = \
+            findIndexList(targetIt->second, sortedLst.begin(), moveIt);
         sortedLst.insert(insertPos, targetIt->second);
 
-        // std::cout << " target: " << target << " prevJacob: " << prevJacob << " lastJacob: " << lastJacob << std::endl;
-        // std::cout << "index: " << index << " value: " << targetIt->second << std::endl;
+        // std::cout << "begin index: " << 0 << " end index: " << move << " value: " << targetIt->second << " index: " << std::distance(sortedLst.begin(), insertPos) << std::endl;
         // std::cout << "SortedLst: ";
         // printLst(sortedLst);
         // std::cout << "______________________" << std::endl;
     }
 }
-
 
 PmergeMe::PmergeMe(PmergeMe const& copy) {
     *this = copy;
@@ -221,7 +186,7 @@ void PmergeMe::makePairLst(void) {
 void PmergeMe::swapPairVec() {
     for (size_t i = 0; i < pairVec.size(); ++i) {
         if (pairVec[i].second != NONE) {
-            if (pairVec[i].first > pairVec[i].second) {
+            if (pairVec[i].first < pairVec[i].second) {
                 std::swap(pairVec[i].first, pairVec[i].second);
             }
         }
@@ -231,7 +196,7 @@ void PmergeMe::swapPairVec() {
 void PmergeMe::swapPairLst() {
     for (std::list<std::pair<long long, long long> >::iterator it = pairLst.begin(); it != pairLst.end(); ++it) {
         if (it->second != NONE) {
-            if (it->first > it->second) {
+            if (it->first < it->second) {
                 std::swap(it->first, it->second);
             }
         }
