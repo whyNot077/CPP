@@ -47,19 +47,23 @@ int main(int argc, char** argv) {
     pm.sortVec();
     pm.sortList();
 
+    // PrintString("___________________________", 30);
     // PrintString("Jacob Index:", 15);
     // pm.printVec(pm.getJacobIndex());
+    // PrintString("Pair Vec:", 10);
+    // pm.printPairVec();
+    // PrintString("Pair Lst:", 10);
+    // pm.printPairLst();
+    // PrintString("___________________________", 30);
 
-    PrintString("Pair Vec:", 10);
-    pm.printPairVec();
-
-    PrintString("Pair Lst:", 10);
-    pm.printPairLst();
 
     PrintString("After:", 10);
     pm.printVec(pm.getSortedVec());
-    PrintString("After:", 10);
-    pm.printLst(pm.getSortedLst());
+
+    // PrintString("___________________________", 30);
+    // PrintString("After:", 10);
+    // pm.printLst(pm.getSortedLst());
+    // PrintString("___________________________", 30);
 
     PrintString("Time to process a range of ", 25);
     std::cout << pm.getVec().size();

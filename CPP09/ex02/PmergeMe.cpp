@@ -298,6 +298,10 @@ void PmergeMe::StrToList(const std::string& line) {
 
     while (std::getline(ss, tmp, ' ')) {
         int num = std::atoi(tmp.c_str());
+        if (num <= 0) {
+            std::cout << "Error" << std::endl;
+            exit(1);
+        }
         lst.push_back(num);
     }
 }
