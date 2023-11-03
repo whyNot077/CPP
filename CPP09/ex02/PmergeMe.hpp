@@ -9,6 +9,8 @@
 #include <utility> 
 #include <sstream>
 #include <ctime>
+#include <cerrno>
+
 class PmergeMe {
 public:
     PmergeMe(const std::string& line);

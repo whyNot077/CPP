@@ -249,17 +249,20 @@ void PmergeMe::merge(int left, int mid, int right) {
 
 void PmergeMe::mergeSort(std::list<std::pair<long long, long long> >::iterator left, 
                std::list<std::pair<long long, long long> >::iterator right) {
-    if (left != right && std::next(left) != right) {
-        std::list<std::pair<long long, long long> >::iterator mid = left;
-        std::advance(mid, std::distance(left, right) / 2);
+    if (left != right) {
+        std::list<std::pair<long long, long long> >::iterator next_left = left;
+        ++next_left;
+        if (next_left != right) {
+            std::list<std::pair<long long, long long> >::iterator mid = left;
+            std::advance(mid, std::distance(left, right) / 2);
 
-        mergeSort(left, mid);
-        mergeSort(mid, right);
+            mergeSort(left, mid);
+            mergeSort(mid, right);
 
-        merge(left, mid, right);
+            merge(left, mid, right);
+        }
     }
 }
-
 
 void PmergeMe::merge(std::list<std::pair<long long, long long> >::iterator left, 
            std::list<std::pair<long long, long long> >::iterator mid, std::list<std::pair<long long, long long> >::iterator right) {
