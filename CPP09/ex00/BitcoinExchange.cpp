@@ -17,11 +17,9 @@ static float GetValue(const std::string& value_str) {
     float value = 0.0f;
     std::string::size_type pos = value_str.find('.');
     if (value_str.length() > 4) {
-        std::cout << "Error: too large a number." << std::endl;
-        value = 1001;
+        throw std::invalid_argument("too large a number");
     } else if (value_str[0] == '-') {
-        std::cout << "Error: not a positive number." << std::endl;
-        value = -1;
+        throw std::invalid_argument("not a positive number");
     } else if (pos != std::string::npos) {
         std::string integer = value_str.substr(0, pos);
         std::string decimal = value_str.substr(pos + 1);
@@ -53,14 +51,21 @@ BitcoinExchange::BitcoinExchange(std::string filename) : csv(csvData), filename(
         date = line.substr(0, pos - 1);
         std::string value_str = line.substr(pos + 1);
 
-        float value = GetValue(value_str);
-        if (IsValidDate(date) && IsValidValue(value))
-            PrintData(date, value);
+        try {
+            float value = GetValue(value_str);
+            if (IsValidDate(date) && IsValidValue(value))
+                PrintData(date, value);
+        } catch (std::invalid_argument& e) {
+            std::cout << "Error: " << e.what() << std::endl;
+        }
     }
 }
 
 bool BitcoinExchange::IsValidValue(const float value) const {
-    return (value >= 0 && value <= 1000);
+    if (value < 0) {
+        throw std::invalid_argument("not a positive number");
+    }
+    return true;
 }
 
 
