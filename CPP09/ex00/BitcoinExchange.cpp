@@ -34,7 +34,7 @@ static float GetValue(const std::string& value_str) {
 BitcoinExchange::BitcoinExchange(std::string filename) : csv(csvData), filename(filename) {
     ParseData(csv);
     std::string date;
-    std::ifstream file(filename);
+    std::ifstream file(filename.c_str());
     if (!file.is_open()) {
         std::cout << "Error: could not open file" << std::endl;
         exit(1);
@@ -75,7 +75,7 @@ void BitcoinExchange::ParseData(const std::string& csv) {
         exit(1);
     }
 
-    std::ifstream file(csv);
+    std::ifstream file(csv.c_str());
     if (!file.is_open()) {
         std::cout << "Error: could not open .csv file" << std::endl;
         exit(1);
@@ -85,14 +85,16 @@ void BitcoinExchange::ParseData(const std::string& csv) {
     while (std::getline(file, line)) {
         std::string date = line.substr(0, line.find(','));
         std::string price = line.substr(line.find(',') + 1);
-        try {
-            data[date] = std::stof(price);
-        } catch (std::invalid_argument& e) {
+        std::istringstream iss(price);
+        float priceValue;
+        if (!(iss >> priceValue)) {
             std::cout << "Invalid float value: " << price << std::endl;
             continue;
         }
+        data[date] = priceValue;
     }
 }
+
 
 static bool IsStrToInt(const std::string& str) {
     char *end;
@@ -175,22 +177,51 @@ static std::string GetPreviousDate(std::string& date) {
     std::string year = date.substr(0, 4);
     std::string month = date.substr(5, 2);
     std::string day = date.substr(8, 2);
+
+    std::stringstream ss;
+    int yearInt, monthInt, dayInt;
+
+    ss << year;
+    ss >> yearInt;
+    ss.clear();
+
+    ss << month;
+    ss >> monthInt;
+    ss.clear();
+
+    ss << day;
+    ss >> dayInt;
+    ss.clear();
+
     if (day == "01") {
         if (month == "01") {
-            year = std::to_string(std::stoi(year) - 1);
+            yearInt -= 1;
             month = "12";
-        } 
-else {
-            month = std::to_string(std::stoi(month) - 1);
-            if (month.size() == 1)
-                month = "0" + month;
+        } else {
+            monthInt -= 1;
+            if (monthInt < 10) {
+                ss << '0' << monthInt;
+            } else {
+                ss << monthInt;
+            }
+            ss >> month;
+            ss.clear();
         }
         day = "31";
     } else {
-        day = std::to_string(std::stoi(day) - 1);
-        if (day.size() == 1)
-            day = "0" + day;
+        dayInt -= 1;
+        if (dayInt < 10) {
+            ss << '0' << dayInt;
+        } else {
+            ss << dayInt;
+        }
+        ss >> day;
+        ss.clear();
     }
+
+    ss << yearInt;
+    ss >> year;
+
     return year + "-" + month + "-" + day;
 }
 

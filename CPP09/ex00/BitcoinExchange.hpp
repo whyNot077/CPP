@@ -9,6 +9,7 @@
 #include <cstdlib>
 #include <cerrno>
 #include <climits>
+#include <sstream>
 
 class BitcoinExchange {
 public:
