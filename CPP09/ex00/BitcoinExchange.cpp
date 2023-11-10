@@ -16,15 +16,14 @@ BitcoinExchange& BitcoinExchange::operator=(BitcoinExchange const& copy) {
 static float GetValue(const std::string& value_str) {
     float value = 0.0f;
     std::string::size_type pos = value_str.find('.');
-    if (value_str.length() > 4) {
-        throw std::invalid_argument("too large a number");
-    } else if (value_str[0] == '-') {
+    if (value_str[0] == '-') {
         throw std::invalid_argument("not a positive number");
     } else if (pos != std::string::npos) {
         std::string integer = value_str.substr(0, pos);
         std::string decimal = value_str.substr(pos + 1);
         float divisor = std::pow(10.0f, decimal.length());
-        value = std::atoi(integer.c_str()) + std::atoi(decimal.c_str()) / divisor;
+        value = std::atoi(integer.c_str()) + \
+        static_cast<float>(std::atoi(decimal.c_str()) / divisor);
     } else {
         value = std::atoi(value_str.c_str());
     }
@@ -64,6 +63,9 @@ BitcoinExchange::BitcoinExchange(std::string filename) : csv(csvData), filename(
 bool BitcoinExchange::IsValidValue(const float value) const {
     if (value < 0) {
         throw std::invalid_argument("not a positive number");
+    }
+    if (value > 1000) {
+        throw std::invalid_argument("too large a number");
     }
     return true;
 }
